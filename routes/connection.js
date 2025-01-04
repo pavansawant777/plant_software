@@ -9,6 +9,6 @@ var conn = mysql.createConnection({
     database: "bun9fq9ycki9avlxsm6h"
 })
 
-var exe = util.promisify(conn.query).bind(conn)
+var exe = util.promisify(conn.query).bind(conn);
 
 module.exports = exe
