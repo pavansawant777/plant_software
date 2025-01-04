@@ -28,7 +28,7 @@
             "url":"/admin-login",
             "data":obj
         }
-<<<<<<< HEAD
+
         ).done((response)=>{
           if(response==0){
             document.getElementById("warn").innerText="No admin found";
@@ -36,11 +36,8 @@
           else{
             location.href="/";
           }
-=======
-        ).done((res)=>{
-            document.getElementById("warn").innerText=res;
->>>>>>> 70516364d57bbb7887793a97f3a54f9d13396bdc
-        })
+        }
+        )
     }
     else{
     document.getElementById("warn").innerText="Please fill details";

@@ -3,11 +3,7 @@ let route=express.Router();
 let mysql=require('mysql');
 let exe=require('./connection')
 function validateAdmin(req,res,next){
-<<<<<<< HEAD
-    // req.session.mid=1;
-=======
-    req.session.mid = 1;
->>>>>>> 70516364d57bbb7887793a97f3a54f9d13396bdc
+
     if(req.session.mid){
 next();
 }
@@ -47,7 +43,7 @@ route.get("/admin-list",validateAdmin,async(req,res)=>{
     }
     res.render("master/adminlist.ejs",obj);
 })
-<<<<<<< HEAD
+
 
 
 route.post("/admin-login",async(req,res)=>{
@@ -89,9 +85,10 @@ route.get("/delete-admin/:id",validateAdmin,async(req,res)=>{
 let d=await exe(`delete from admin where id='${req.params.id}'`);
 req.session.mid=undefined;
 res.redirect("/");
-=======
+})
+
 route.post("/admin-login",validateAdmin,async(req,res)=>{
     res.send(req.body);
->>>>>>> 70516364d57bbb7887793a97f3a54f9d13396bdc
+
 })
 module.exports=route;
