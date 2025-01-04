@@ -47,6 +47,10 @@
 
 <!-- Core JS -->
 <!-- build:js assets/vendor/js/core.js -->
+   <!-- jQuery (required for DataTables) -->
+  
+
+ 
 <script src="./assets/vendor/libs/jquery/jquery.js"></script>
 <script src="./assets/vendor/libs/popper/popper.js"></script>
 <script src="./assets/vendor/js/bootstrap.js"></script>
@@ -66,5 +70,14 @@
 
 <!-- Place this tag in your head or just before your close body tag. -->
 <script async defer src="https://buttons.github.io/buttons.js"></script>
+  <!-- DataTables JS from CDN -->
+  <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+
+  <!-- Initialize DataTable -->
+  <script>
+      $(document).ready(function() {
+          $('#example').DataTable(); // Initialize the table with DataTables
+      });
+  </script>
 </body>
 </html>

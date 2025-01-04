@@ -6,12 +6,38 @@
     <title>Document</title>
 </head>
 <body>
-    <form method="post" action="/master-login">
+   
 
 
-    <input type="number" name="number" placeholder="Your Name" >
-    <input type="text" name="password" placeholder="Your Password" >
-    <button type="submit">Save</button>
-</form>
+    <input type="number" id="number" placeholder="Your Number" >
+    <input type="text" id="password" placeholder="Your Password" >
+    <span id="warn" class="text-danger"></span>
+    <button type="submit" onclick="sendData()" >Save</button>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        function sendData(){
+     
+            if(document.getElementById("number").value!=""&&document.getElementById("password").value!=""){
+        obj={
+            "name":'pratik',
+            "pass":'hje'
+        }
+        $.ajax(
+        {
+            "method":"post",
+            "url":"/admin-login",
+            "data":obj
+        }
+        ).done((res)=>{
+            document.getElementById("warn").innerText=res;
+        })
+    }
+    else{
+    document.getElementById("warn").innerText="Please fill details";
+    }
+    }
+
+    </script>
+
 </body>
 </html>
