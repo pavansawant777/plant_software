@@ -1,0 +1,37 @@
+<%-include('header.ejs')%>
+<div class="container">
+    <div class="row p-5 " style="overflow-x: scroll;">
+        <h3>ADMIN LIST</h3>
+        <div class="col-md-12">
+            <table id="example" class="display">
+                <thead>
+                    <tr>
+                        <th>Image</th>
+                        <th>Name</th>
+                        <th>Number</th>
+                        
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    <%for(let i of data){%>
+                    <tr>
+                        <td><img src="./images/<%-i.image%>" style="width: 50px;height: 50px;border-radius: 50%;"/> </td>
+                        <td><%-i.name%></td>
+                        <td><%-i.contact%></td>
+                   
+                        
+                       
+                    </tr>
+                    <%}%>
+                  
+                    <!-- More rows can be added here -->
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>
+
+
+<%-include('footer.ejs')%>
