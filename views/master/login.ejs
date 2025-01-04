@@ -12,22 +12,23 @@
     <input type="number" id="number" placeholder="Your Number" >
     <input type="text" id="password" placeholder="Your Password" >
     <span id="warn" class="text-danger"></span>
-    <button type="button" onclick="sendData()" >Save</button>
+    <button type="submit" onclick="sendData()" >Save</button>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         function sendData(){
      
             if(document.getElementById("number").value!=""&&document.getElementById("password").value!=""){
         obj={
-            "number":document.getElementById("number").value,
-            "pass":document.getElementById("password").value
+            "name":'pratik',
+            "pass":'hje'
         }
         $.ajax(
         {
-            "url":"/admin-login",
             "method":"post",
+            "url":"/admin-login",
             "data":obj
         }
+<<<<<<< HEAD
         ).done((response)=>{
           if(response==0){
             document.getElementById("warn").innerText="No admin found";
@@ -35,6 +36,10 @@
           else{
             location.href="/";
           }
+=======
+        ).done((res)=>{
+            document.getElementById("warn").innerText=res;
+>>>>>>> 70516364d57bbb7887793a97f3a54f9d13396bdc
         })
     }
     else{
