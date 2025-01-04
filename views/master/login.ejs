@@ -29,7 +29,12 @@
             "data":obj
         }
         ).done((response)=>{
-     
+          if(response==0){
+            document.getElementById("warn").innerText="No admin found";
+          }
+          else{
+            location.href="/";
+          }
         })
     }
     else{

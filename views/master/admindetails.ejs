@@ -1,0 +1,52 @@
+<%-include('header.ejs')%>
+<div class="container">
+    <div class="row p-5 align-items-center justify-content-center">
+<h3>ADMIN PROFILE</h3>
+<div class="col-md-12 rounded shadow bg-white p-4 mt-4">
+    <div class="row">
+
+        <div class="col-md-4 mb-3">
+        <form method="post" enctype="multipart/form-data" action="/update-admin/<%-admin.id%>" id="myform">
+
+ 
+            <label class="mb-2">Name* :</label>
+            <input type="text" required value="<%-admin.name%>" name="name"  class="form-control">
+        </div>
+        <div class="col-md-4 mb-3">
+            <label class="mb-2">Image* :</label>
+            <input type="file"   name="img" class="form-control">
+        </div>
+        <div class="col-md-4 mb-3">
+            <label class="mb-2">Contact Number* :</label>
+            <input type="number" required value="<%-admin.contact%>" name="number" class="form-control">
+        </div>
+        <div class="col-md-4 mb-3">
+            <label class="mb-2"> Password* :</label>
+            <input type="text" required value="<%-admin.password%>" name="pass" class="form-control">
+        </div>
+        <div class="col-md-12 text-center mt-3">
+            <button class="btn btn-primary" type="button" onclick="submitForm()" >Update</button>
+            <button class="btn btn-danger" type="button" onclick="deleteAc('<%-admin.id%>')">Delete Admin</button>
+        </form>
+        </div>
+    </div>
+</div>
+    </div>
+</div>
+<script>
+    function submitForm(){
+    let r=confirm('Update Admin ?');
+    if(r==true){
+        document.getElementById("myform").submit();
+    }
+    }
+    function deleteAc(id){
+    let r=confirm('Delete Admin ?');
+    if(r==true){
+        location.href='/delete-admin/'+id;
+    }
+    }
+    
+    </script>
+
+<%-include('footer.ejs')%>
