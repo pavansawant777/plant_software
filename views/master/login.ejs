@@ -12,24 +12,24 @@
     <input type="number" id="number" placeholder="Your Number" >
     <input type="text" id="password" placeholder="Your Password" >
     <span id="warn" class="text-danger"></span>
-    <button type="submit" onclick="sendData()" >Save</button>
+    <button type="button" onclick="sendData()" >Save</button>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         function sendData(){
      
             if(document.getElementById("number").value!=""&&document.getElementById("password").value!=""){
         obj={
-            "name":'pratik',
-            "pass":'hje'
+            "number":document.getElementById("number").value,
+            "pass":document.getElementById("password").value
         }
         $.ajax(
         {
-            "method":"post",
             "url":"/admin-login",
+            "method":"post",
             "data":obj
         }
-        ).done((res)=>{
-            document.getElementById("warn").innerText=res;
+        ).done((response)=>{
+     
         })
     }
     else{

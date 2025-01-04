@@ -31,7 +31,9 @@ route.get("/admin-list",validateAdmin,async(req,res)=>{
     }
     res.render("master/adminlist.ejs",obj);
 })
-route.post("/admin-login",validateAdmin,async(req,res)=>{
+
+
+route.post("/admin-login",async(req,res)=>{
     res.send(req.body);
 })
 module.exports=route;
