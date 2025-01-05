@@ -107,7 +107,19 @@
         document.getElementById("veh-sub-list").classList.add("active")
        }
     }
+    if(url.includes("add_stock")||url.includes("stock_list")||url.includes("edit_stock")){
+    document.getElementById("dash").classList.remove("active");
+      document.getElementById("stock-main").classList.add("active")
+       document.getElementById("stock-main").classList.add("open")
+       if(url.includes("add_stock")){
+        document.getElementById("stock-sub-add").classList.add("active")
+       }
+       else{
+        document.getElementById("stock-sub-list").classList.add("active")
+       }
+    }
   }
+
   changeActiveMenu();
 </script>
 </body>
