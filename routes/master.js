@@ -226,7 +226,7 @@ route.post("/update-car/:id",async(req,res)=>{
      let d=req.body;
      let data=await exe(`update vehical set name='${d.name}',number='${d.number}',image='${d.image}',isAvilable='${d.isAvilable}' where id='${req.params.id}'`);
 
-<<<<<<< HEAD
+
 
     route.get("/add_stock",validateAdmin,async function(req,res){
 
@@ -292,7 +292,7 @@ route.post("/update-car/:id",async(req,res)=>{
 
     })
 
-=======
+
     }
     else{
  let d=req.body;
@@ -304,5 +304,5 @@ route.get("/delete-vehical/:id",validateAdmin,async(req,res)=>{
 let d=await exe(`delete from vehical where id='${req.params.id}'`)
 res.redirect("/vehical-list");
 })
->>>>>>> aa03f0b47dcf6e98f201c111d3b3d0afd96219e2
+
 module.exports=route;
