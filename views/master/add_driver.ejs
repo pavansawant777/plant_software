@@ -1,0 +1,65 @@
+<%- include("header.ejs") %>
+
+
+            <form action="/save_driver_details" method="post" enctype="multipart/form-data" id="myform" class="m-5">
+                <div class="container-fluid bg-white p-4">
+                    <div class="row">
+                        <div class="mb-3 col-md-12">
+                            <h3>Add Driver</h3>
+                        </div>
+            
+                        <div class="mb-3 col-md-6">
+                            Driver Name*
+                            <input type="text" name="driver_name" class="form-control">
+                        </div>
+            
+                        <div class="mb-3 col-md-6">
+                            Driver Mobile.No*
+                            <input type="text" name="driver_mobile" class="form-control">
+                        </div>
+            
+                        <div class="mb-3 col-md-12">
+                            Driver Address*
+                            <textarea name="driver_address" class="form-control"></textarea>
+                        </div>
+            
+                        <div class="mb-3 col-md-6">
+                            Driver Image*
+                            <input type="file"  name="driver_image" class="form-control"  accept="image/*">
+                        </div>
+            
+                        <div class="mb-3 col-md-6">
+                            Driver Avaliable Status*
+                           
+                            <select name="driver_available_status" class="form-control">
+                                <option value="" disabled selected>Select status</option>
+                                <option value="true">Avilable</option>
+                                <option value="false">Not Avilable</option>
+                            </select>
+                        </div>
+            
+                        <div class="mb-3 col-md-12">
+                            Driver Password*
+                            <input type="password" name="driver_password" class="form-control">
+                        </div>
+            
+            
+                        <div class="mb-3 col-md-12 text-center">
+                            <br>
+                            <button class="btn btn-primary" type="button" onclick="submitForm()">Save Driver Details</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+        
+
+            <script>
+                function submitForm(){
+                let r=confirm('Add new Driver ?');
+                if(r==true){
+                    document.getElementById("myform").submit();
+                }
+                }
+                </script>
+<%- include("footer.ejs") %>

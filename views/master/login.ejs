@@ -22,27 +22,32 @@
       </div>
       <div class="col-md-6 d-flex align-items-center justify-content-center">
         <div>
-          <form action="" class="needs-validation bg-light p-5 rounded shadow" novalidate>
+<div class="bg-light p-5 rounded shadow">
+
+
             <h5>Sign into your account</h5>
-            <div class="col my-3">
-              <label for="username" class="form-label">username</label>
-              <input type="number" class="rounded-0 form-control" id="username" placeholder="Your Username" required>
+            <div class="col-12 my-3">
+              <label for="username" class="form-label">Username</label>
+              <input type="number" class="rounded-0 w-100 form-control" id="number" placeholder="Your Username" required>
               <div class="invalid-feedback">
                 Please enter valid username.
               </div>
             </div>
             <div class="col my-3">
-              <label for="password" class="form-label">password</label>
+              <label for="password" class="form-label">Password</label>
               <input type="password" class="rounded-0 form-control" id="password" placeholder="Your Password" required>
               <div class="invalid-feedback">
                 Please enter valid password.
               </div>
             </div>
-            <span id="warn" class="text-danger"></span>
-            <div class="col mt-5">
-              <button type="submit" onclick="sendData()" class="btn btn-primary w-100">Secure Login</button>
+            <div class="w-100 text-center">
+              <span id="warn" class="text-danger" style="font-size: 13px;"></span>
+
             </div>
-          </form>
+            <div class="col mt-5">
+              <button type="button" onclick="sendData()" class="btn btn-primary w-100">Secure Login</button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -50,26 +55,6 @@
   </div>
 
 
-  <script>
-    (() => {
-  'use strict'
-
-  // Fetch all the forms we want to apply custom Bootstrap validation styles to
-  const forms = document.querySelectorAll('.needs-validation')
-
-  // Loop over them and prevent submission
-  Array.from(forms).forEach(form => {
-    form.addEventListener('submit', event => {
-      if (!form.checkValidity()) {
-        event.preventDefault()
-        event.stopPropagation()
-      }
-
-      form.classList.add('was-validated')
-    }, false)
-  })
-})()
-  </script>
 
   <!-- <input type="number" id="number" placeholder="Your Number" >
     <input type="text" id="password" placeholder="Your Password" >
@@ -81,8 +66,8 @@
 
       if (document.getElementById("number").value != "" && document.getElementById("password").value != "") {
         obj = {
-          "name": 'pratik',
-          "pass": 'hje'
+          "name": document.getElementById('number').value,
+          "pass": document.getElementById("password").value
         }
         $.ajax(
           {
@@ -93,7 +78,8 @@
 
         ).done((response) => {
           if (response == 0) {
-            document.getElementById("warn").innerText = "No admin found";
+            console.log(response);
+            document.getElementById("warn").innerHTML = "<i class='fa fa-warning'></i>No admin found";
           }
           else {
             location.href = "/";

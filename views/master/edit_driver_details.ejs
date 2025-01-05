@@ -1,0 +1,76 @@
+<%- include("header.ejs") %>
+
+
+<form action="/update_driver_details" method="post" enctype="multipart/form-data" class="m-5" id="myform">
+    <input type="hidden" name="driver_details_id" value="<%= driver_det.driver_details_id %>">
+    <div class="container-fluid bg-white p-4">
+        <div class="row">
+            <div class="mb-3 col-md-12">
+                <h3>Update Driver Details</h3>
+            </div>
+            <div class="col-md-12 mb-3">
+                <img style="width: 100px;filter: drop-shadow(2px 2px 2px rgb(82, 81, 81));" id="pfp" src="/images/<%= driver_det.driver_image %>"><br/>
+            </div>
+            <div class="mb-3 col-md-6">
+                Driver Name*
+                <input type="text" name="driver_name" value="<%= driver_det.driver_name %>" class="form-control">
+            </div>
+
+            <div class="mb-3 col-md-6">
+                Driver Mobile.No*
+                <input type="text" name="driver_mobile" value="<%= driver_det.driver_mobile %>" class="form-control">
+            </div>
+            <div class="mb-3 col-md-12">
+                Driver Address*
+            <textarea name="driver_address" class="form-control">
+            <%= driver_det.driver_address %>
+            </textarea>
+            </div>
+
+            <div class="mb-3 col-md-6">
+                Driver Image*
+                <input type="file" name="driver_image" onchange="privewImg()" class="form-control" accept="image/*">
+               
+            </div>
+
+            <div class="mb-3 col-md-6">
+                Driver Avaliable Status*
+                <!-- <input type="text" name="driver_available_status" value="<%= driver_det.driver_available_status %>" class="form-control"> -->
+                <select name="driver_available_status" class="form-control">
+                    <option value="" disabled selected>Select status</option>
+                    <option  value="true" <%-(driver_det.driver_available_status=='true')?'selected':''%>>Avilable</option>
+                    <option value="false" <%-(driver_det.driver_available_status=='false')?'selected':''%>>Not Avilable</option>
+                </select>
+            </div>
+
+            <div class="mb-3 col-md-12">
+                Driver Password*
+                <input type="text" name="driver_password" value="<%= driver_det.driver_password %>" class="form-control">
+            </div>
+
+
+            <div class="mb-3 col-md-12 text-center">
+                <br>
+                <button class="btn btn-primary" type="button" onclick="submitForm()">Update Driver Details</button>
+            </div>
+        </div>
+    </div>
+</form>
+<script>
+    function privewImg(){
+       
+       document.getElementById("pfp").setAttribute("src",URL.createObjectURL(event.target.files[0]));
+        
+    }
+    
+</script>
+<script>
+    function submitForm(){
+    let r=confirm('Edit Driver ?');
+    if(r==true){
+        document.getElementById("myform").submit();
+    }
+    }
+    </script>
+
+<%- include("footer.ejs") %>
