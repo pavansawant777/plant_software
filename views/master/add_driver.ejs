@@ -10,12 +10,12 @@
             
                         <div class="mb-3 col-md-6">
                             Driver Name*
-                            <input type="text" name="driver_name" class="form-control">
+                            <input required type="text" name="driver_name" class="form-control">
                         </div>
             
                         <div class="mb-3 col-md-6">
                             Driver Mobile.No*
-                            <input type="text" name="driver_mobile" class="form-control">
+                            <input required type="text" name="driver_mobile" class="form-control">
                         </div>
             
                         <div class="mb-3 col-md-12">
@@ -25,7 +25,7 @@
             
                         <div class="mb-3 col-md-6">
                             Driver Image*
-                            <input type="file"  name="driver_image" class="form-control"  accept="image/*">
+                            <input required type="file"  name="driver_image" class="form-control"  accept="image/*">
                         </div>
             
                         <div class="mb-3 col-md-6">
@@ -38,9 +38,13 @@
                             </select>
                         </div>
             
-                        <div class="mb-3 col-md-12">
+                        <div class="mb-3 col-md-6">
                             Driver Password*
-                            <input type="password" name="driver_password" class="form-control">
+                            <input required type="password" name="driver_password" class="form-control">
+                        </div>
+                        <div class="mb-3 col-md-6">
+                            Driver Salary (per month)*
+                            <input required type="number" name="driver_payment" class="form-control">
                         </div>
             
             

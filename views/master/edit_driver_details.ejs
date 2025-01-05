@@ -2,7 +2,7 @@
 
 
 <form action="/update_driver_details" method="post" enctype="multipart/form-data" class="m-5" id="myform">
-    <input type="hidden" name="driver_details_id" value="<%= driver_det.driver_details_id %>">
+    <input required type="hidden" name="driver_details_id" value="<%= driver_det.driver_details_id %>">
     <div class="container-fluid bg-white p-4">
         <div class="row">
             <div class="mb-3 col-md-12">
@@ -13,12 +13,12 @@
             </div>
             <div class="mb-3 col-md-6">
                 Driver Name*
-                <input type="text" name="driver_name" value="<%= driver_det.driver_name %>" class="form-control">
+                <input required type="text" name="driver_name" value="<%= driver_det.driver_name %>" class="form-control">
             </div>
 
             <div class="mb-3 col-md-6">
                 Driver Mobile.No*
-                <input type="text" name="driver_mobile" value="<%= driver_det.driver_mobile %>" class="form-control">
+                <input required type="text" name="driver_mobile" value="<%= driver_det.driver_mobile %>" class="form-control">
             </div>
             <div class="mb-3 col-md-12">
                 Driver Address*
@@ -29,7 +29,7 @@
 
             <div class="mb-3 col-md-6">
                 Driver Image*
-                <input type="file" name="driver_image" onchange="privewImg()" class="form-control" accept="image/*">
+                <input required type="file" name="driver_image" onchange="privewImg()" class="form-control" accept="image/*">
                
             </div>
 
@@ -43,11 +43,14 @@
                 </select>
             </div>
 
-            <div class="mb-3 col-md-12">
+            <div class="mb-3 col-md-6">
                 Driver Password*
-                <input type="text" name="driver_password" value="<%= driver_det.driver_password %>" class="form-control">
+                <input type="text" name="driver_password" value="<%= driver_det.driver_password %>" required class="form-control">
             </div>
-
+            <div class="mb-3 col-md-6">
+                Driver Salary (per month)*
+                <input required type="number" name="driver_payment" value="<%= driver_det.salary %>" class="form-control">
+            </div>
 
             <div class="mb-3 col-md-12 text-center">
                 <br>

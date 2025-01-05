@@ -1,0 +1,50 @@
+<%-include('header.ejs')%>
+<div class="container">
+    <div class="row p-5">
+        <div class="col-md-12 bg-white p-4 rounded">
+            <h3>VEHICAL DETAILS</h3>
+            <div class="row mt-3">
+                <div class="col-md-12 mb-3">
+                    <img src="/images/<%-vehi.image%>" style="height: 100px; width: 150px;" class="shadow" id="img"/>
+                </div>
+                <div class="mb-3 col-md-4">
+                    <form action="/update-car/<%-vehi.id%>"  method="post" enctype="multipart/form-data" >
+
+                 
+                    <label class="mb-2">Vehical Image* :</label>
+                    <input type="file" class="form-control" accept="image/*" onchange="changeImg()" name="img"/>
+                </div>
+                <div class="mb-3 col-md-4">
+                    <label class="mb-2">Vehical Number* :</label>
+                    <input type="text" class="form-control" value="<%-vehi.number%>"  placeholder="XX  XX  XXXX" required name="number"/>
+                </div>
+                <div class="mb-3 col-md-4">
+                    <label class="mb-2">Vehical Name* :</label>
+                    <input type="text" class="form-control" value="<%-vehi.name%>"   required name="name"/>
+                </div>
+                <div class="mb-3 col-md-4">
+                    <label class="mb-2">Vehical status* :</label>
+                    <select name="isAvilable" class="form-control">
+                        <option value="" disabled selected>Select status</option>
+                        <option  value="true" <%-(vehi.isAvilable=='true')?'selected':''%>>Avilable</option>
+                        <option value="false" <%-(vehi.isAvilable=='false')?'selected':''%>>Not Avilable</option>
+                    </select>
+                </div>
+                <div class="col-md-12 mt-2 text-center">
+                    <button class="btn btn-primary" type="submit">Update Details</button>
+                </form>
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function changeImg(){
+        document.getElementById("img").setAttribute("src", URL.createObjectURL(event.target.files[0]))
+    
+    }
+</script>
+
+
+<%-include('footer.ejs')%>
