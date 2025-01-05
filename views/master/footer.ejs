@@ -96,6 +96,17 @@
         document.getElementById("driv-sub-list").classList.add("active")
        }
     }
+    if(url.includes("add-vehical")||url.includes("vehical-list")||url.includes("edit-vehical")){
+    document.getElementById("dash").classList.remove("active");
+      document.getElementById("veh-main").classList.add("active")
+       document.getElementById("veh-main").classList.add("open")
+       if(url.includes("add-vehical")){
+        document.getElementById("veh-sub-add").classList.add("active")
+       }
+       else{
+        document.getElementById("veh-sub-list").classList.add("active")
+       }
+    }
   }
   changeActiveMenu();
 </script>

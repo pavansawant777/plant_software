@@ -113,14 +113,16 @@ route.get("/add_driver",validateAdmin,async (req,res)=>
                                               driver_address,
                                               driver_available_status,
                                               driver_password,
-                                              driver_image)
+                                              driver_image,
+                                              salary)
                                               VALUES(
                                               '${d.driver_name}',
                                               '${d.driver_mobile}',
                                               '${d.driver_address}',
                                               '${d.driver_available_status}',
                                               '${d.driver_password}',
-                                              '${d.driver_image}')`;
+                                              '${d.driver_image}',
+                                              '${d.driver_payment}')`;
         
         var data = await exe(sql);
     
@@ -158,7 +160,8 @@ route.get("/add_driver",validateAdmin,async (req,res)=>
                                               driver_address='${d.driver_address}',
                                               driver_available_status='${d.driver_available_status}',
                                               driver_password='${d.driver_password}',
-                                              driver_image='${d.driver_image}' WHERE driver_details_id = '${d.driver_details_id}'`;
+                                              driver_image='${d.driver_image}',
+                                              salary='${d.driver_payment}' WHERE driver_details_id = '${d.driver_details_id}'`;
         var data = await exe(sql)
         res.redirect("/driver_list");
         }
@@ -168,7 +171,9 @@ route.get("/add_driver",validateAdmin,async (req,res)=>
                                               driver_mobile='${d.driver_mobile}',
                                               driver_address='${d.driver_address}',
                                               driver_available_status='${d.driver_available_status}',
-                                              driver_password='${d.driver_password}' WHERE driver_details_id = '${d.driver_details_id}'`
+                                              driver_password='${d.driver_password}'
+                                              ,
+                                              salary='${d.driver_payment}' WHERE driver_details_id = '${d.driver_details_id}'`
         var data = await exe(sql)
         res.redirect("/driver_list") 
         }
@@ -182,7 +187,46 @@ route.get("/add_driver",validateAdmin,async (req,res)=>
         var data = await exe(sql);
         res.redirect("/driver_list");
     });
+route.get("/add-vehical",validateAdmin,async(req,res)=>{
+    let user=await exe(`select*from admin where id='${req.session.mid}'`);
+    let obj={
+        "admin":user[0]
+    }
+    res.render("master/addvehical.ejs",obj);
+})
+route.post("/save-vehical",async(req,res)=>{
+req.body.image=new Date().getTime()+req.files.img.name;
+req.files.img.mv("public/images/"+req.body.image);
+let d=req.body;
+let data=await exe(`insert into vehical(name,number,image,isAvilable) values('${d.name}','${d.number}','${d.image}','${'true'}')`);
+res.redirect("/vehical-list");
+})
+route.get("/vehical-list",validateAdmin,async(req,res)=>{
+    let d=await exe(`select*from vehical`);
+    let user=await exe(`select*from admin where id='${req.session.mid}'`);
+    let obj={
+        "admin":user[0],
+        "vehi":d
+    }
+res.render("master/vehilist.ejs",obj);
+})
+route.get("/edit-vehical/:id",validateAdmin,async(req,res)=>{
+    let d=await exe(`select*from vehical where id='${req.params.id}'`);
+    let user=await exe(`select*from admin where id='${req.session.mid}'`);
+    let obj={
+        "admin":user[0],
+        "vehi":d[0]
+    }
+    res.render("master/vehidetails.ejs",obj);
+})
+route.post("/update-car/:id",async(req,res)=>{
+    if(req.files){
+     req.body.image=new Date().getTime()+req.files.img.name;
+     req.files.img.mv("public/images/"+req.body.image);
+     let d=req.body;
+     let data=await exe(`update vehical set name='${d.name}',number='${d.number}',image='${d.image}',isAvilable='${d.isAvilable}' where id='${req.params.id}'`);
 
+<<<<<<< HEAD
 
     route.get("/add_stock",validateAdmin,async function(req,res){
 
@@ -248,4 +292,17 @@ route.get("/add_driver",validateAdmin,async (req,res)=>
 
     })
 
+=======
+    }
+    else{
+ let d=req.body;
+     let data=await exe(`update vehical set name='${d.name}',number='${d.number}',isAvilable='${d.isAvilable}' where id='${req.params.id}'`);
+    }
+    res.redirect("/edit-vehical/"+req.params.id);
+})
+route.get("/delete-vehical/:id",validateAdmin,async(req,res)=>{
+let d=await exe(`delete from vehical where id='${req.params.id}'`)
+res.redirect("/vehical-list");
+})
+>>>>>>> aa03f0b47dcf6e98f201c111d3b3d0afd96219e2
 module.exports=route;

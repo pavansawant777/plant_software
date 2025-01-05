@@ -1,0 +1,44 @@
+<%-include('header.ejs')%>
+<div class="container">
+    <div class="row p-5">
+        <div class="col-md-12 bg-light p-4 rounded ">
+            <h3>VEHICAL LIST</h3>
+            <div class="col-md-12 mt-3 " style="overflow-x: scroll;">
+                <table class="display" id="example">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Image</th>
+                            <th>Number</th>
+                            <th>Name</th>
+                            <th>Avilable</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <%for(let i of vehi){%>
+                            <tr>
+                                <td><a href="/edit-vehical/<%-i.id%>"><i class="fa fa-edit"></i></a></td>
+                                <td><img src="/images/<%-i.image%>" style="height: 100px;width: 150px;" alt="vehical image"></td>
+                                <td><%-i.name%></td>
+                                <td><%-i.number%></td>
+                                <td><%-(i.isAvilable=='true')?'Avilable':'Not'%></td>
+                                <td><button class="btn btn-danger" onclick="deleteVeh('<%-i.id%>')"><i class="fa fa-trash"></i></button></td>
+                            </tr>
+                            
+                            <%}%>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function deleteVeh(id){
+        let r=confirm('Delete Vehical ?');
+        if(r==true){
+            location.href='/delete-vehical/'+id;
+        }
+    }
+</script>
+<%-include('footer.ejs')%>

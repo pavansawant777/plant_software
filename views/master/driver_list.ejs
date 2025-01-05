@@ -12,12 +12,15 @@
     
          
             <tr>
+                <th>#</th>
                 <th>Driver Image</th>
                 <th>Driver Name</th>
                 <th>Driver Mobile.No</th>
                 <th>Driver Address</th>
                 <th>Driver Password</th>
                 <th>Driver Avaliable Status</th>
+                <th>Driver Salary</th>
+
                 <th>Action</th>
             </tr>
         </thead>
@@ -27,19 +30,23 @@
             <% for(var i=0;i<driver_det.length;i++) { %>
             <tr>
                 <td>
+                    <a href="/edit_driver_details/<%= driver_det[i].driver_details_id %>">
+                        <i class="fa fa-edit"></i>
+                       </a>
+                </td>
+                <td>
                     <img style="width: 50px;height: 50px;border-radius: 50%;"  src="/images/<%= driver_det[i].driver_image %>">
                 </td>
                 <td><%= driver_det[i].driver_name %></td>
                 <td><%= driver_det[i].driver_mobile %></td>
                 <td><%= driver_det[i].driver_address %></td>
                 <td><%= driver_det[i].driver_password %></td>
+                <td>&#8377; <%= driver_det[i].salary %></td>
                 <td>
                     
                     <%= (driver_det[i].driver_available_status=='true')?'Avilable':'Not ' %></td>
                 <td>
-                    <a href="/edit_driver_details/<%= driver_det[i].driver_details_id %>">
-                        <button class="btn btn-secondary p-2"><i class="fa fa-edit"></i></button>
-                    </a>
+                   
                 
                         <button class="btn btn-danger p-2"onclick="deleteDriver('<%= driver_det[i].driver_details_id %>')"><i class="fa fa-trash"></i></button>
                     
