@@ -1,0 +1,33 @@
+<%-include("header.ejs")%>
+<div class="container bg-white my-3 table-responsive">
+    <h1 class="my-3">Stock List</h1>
+    <table class="table table-bordered table-hovers">
+        <tr>
+            <th>SR</th>
+            <th>Action</th>
+            <th>Stock Name</th>
+            <th>Stock Quantity</th>
+            <th>Stock Unit</th>
+            <th>Stock Date</th>
+        </tr>
+        <% stock.map((row,i)=>{ %>
+            <tr>
+                <th><%-i+1%></th>
+                <th>
+                    <a href="/edit_stock/<%-row.stock_id%>">
+                        <button class="btn btn-sm btn-primary">Edit</button>
+                    </a>
+                    <a href="/delete_stock/<%-row.stock_id%>">
+                        <button class="btn btn-sm btn-danger">Delete</button>
+                    </a>
+                    
+                </th>
+                <th><%-row.stock_name%></th>
+                <th><%-row.stock_qty%></th>
+                <th><%-row.stock_unit%></th>
+                <th><%-row.stock_date%></th>
+            </tr>
+        <% }) %>
+    </table>
+</div>
+<%-include("footer.ejs")%>

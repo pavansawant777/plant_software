@@ -13,4 +13,4 @@ app.use(session({
 }));
 app.use(bodyparser.urlencoded({extended:true}));
 app.use("/",master);
-app.listen(1000);
+app.listen(1000);  

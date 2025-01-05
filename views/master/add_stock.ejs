@@ -1,0 +1,40 @@
+<%-include("header.ejs")%>
+    <div class="container bg-white p-4">
+
+        <h1>Add Stock</h1>
+
+        <form action="/save_stock" method="post" enctype="multipart/form-data" id="myform">
+            <div class="row">
+                <div class="col-md-6">
+                    <label class="my-3">Stock Name</label>
+                    <input type="text" name="stock_name" class="form-control">
+                </div>
+                <div class="col-md-6">
+                    <label class="my-3">Stock Quantity</label>
+                    <input type="number" name="stock_qty" class="form-control">
+                </div>
+                <div class="col-md-6">
+                    <label class="my-3">Stock Unit</label>
+                    <input type="number" name="stock_unit" class="form-control">
+                </div>
+                <div class="col-md-6">
+                    <label class="my-3">Stock Date</label>
+                    <input type="date" name="stock_date" class="form-control">
+                </div>
+                <div class="col-md-12 my-3 text-center">
+                    <button class="btn btn-primary" onclick="submitform()">Save Stock</button>
+                </div>
+            </div>
+        </form>
+
+    </div>
+
+    <script>
+        function submitform(){
+        let r=confirm('Add new Stock ?');
+        if(r==true){
+            document.getElementById("myform").submit();
+        }
+        }
+        </script>
+<%-include("footer.ejs")%>
