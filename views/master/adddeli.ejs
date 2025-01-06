@@ -2,7 +2,7 @@
 <div class="container">
     <div class="row p-5">
         <h3 >ADD DELIVERY</h3>
-        <div class="col-md-12 rounded bg-light p-4">
+        <div class="col-md-12 rounded bg-light p-4" >
         <h4>DILEVERY &  ADDRESS DETAILS </h4>
            <div class="row">
             <div class="col-md-6 mb-3">
@@ -28,8 +28,9 @@
 
            </div>
         </div>
-        <div class="col-md-12 rounded bg-light p-4 mt-5" >
-            <table class="table table-striped">
+        <div class="col-md-12 rounded bg-light p-4 mt-5" style="overflow-x:scroll;" >
+            <h4>PRODUCT DETAILS</h4>
+            <table class="table mt-4 table-striped">
                 <tr>
                     <th>Product</th>
                     <th>Qauntity</th>
@@ -44,6 +45,7 @@
             
                 
             </table>
+            <button class="btn btn-success mt-5" onclick="sendData()" id="subbtn" disabled>Procceed</button>
         </div>
     </div>
 </div>
@@ -75,11 +77,45 @@
        
         `)
         j++;
+toggleBtn()
     }
+function toggleBtn(){
+if(j>0){
+document.getElementById("subbtn").disabled=false;
+}
+else{
+    document.getElementById("subbtn").disabled=true;
 
+}
+}
 function deleteRow(){
     event.target.closest('tr').remove();
+    j--;
+    toggleBtn()
 }
-
+function sendData(){
+    let obj={
+        "driver":document.getElementById("driver").value,
+        "order_date":document.getElementById("oder_date").value,
+        "address":document.getElementById("addr").value,
+        "product":[],
+        "qty":[]
+    }
+    let pro=document.getElementsByName("product");
+    let qty=document.getElementsByName("qty");
+    for(let i of pro){
+        obj.product.push(i.value);
+    }
+    for(let i of qty){
+        obj.qty.push(i.value);
+    }
+    $.ajax({
+        "method":"post",
+        "url":"/save-delivery",
+        "data":obj
+    }).done((res)=>{
+      location.href="/delivery-list"
+    })
+}
 </script>
 <%-include('footer.ejs')%>

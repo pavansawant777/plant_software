@@ -233,11 +233,7 @@ route.post("/update-car/:id",async(req,res)=>{
      let data=await exe(`update vehical set name='${d.name}',number='${d.number}',image='${d.image}',isAvilable='${d.isAvilable}' where id='${req.params.id}'`);
 
 
-<<<<<<< Updated upstream
- 
-=======
 
->>>>>>> Stashed changes
 
     }
     else{
@@ -388,4 +384,27 @@ route.get("/add_stock",validateAdmin,async function(req,res){
      res.send("<script>confirm('Are you Sure');location.href=document.referrer;</script>")
 
  })
+ 
+ route.post("/save-delivery",async(req,res)=>{
+    let update_drive=await exe(`update driver_details set driver_available_status='false' where driver_details_id='${req.body.driver}'`);
+    let oderdet=await exe(`insert into order_det(order_date,driver,address,status) values('${req.body.order_date}','${req.body.driver}','${req.body.address}','pending')`);
+    for(let i=0;i<req.body.product.length;i++){
+         let sto=await exe(`select*from stock where stock_id='${req.body.product[i]}'`);
+         let update_sto=await exe(`update stock set stock_qty='${sto[0].stock_qty-req.body.qty[i]}'`);
+        let d=await exe(`insert into order_list(product,qty,order_id) values('${req.body.product[i]}','${req.body.qty[i]}','${oderdet.insertId}')`);
+
+    }
+    res.send("1");
+   
+})
+route.get("/delivery-list",validateAdmin,async(req,res)=>{
+    let d=await exe(`select*,(select number from vehical where vehical.id=order_det.vehical ) as v_num,(select driver_name from driver_details where driver_details.driver_details_id=order_det.driver) as driver_name from order_det `);
+    let user=await exe(`select*from admin where id='${req.session.mid}'`);
+    var obj ={"data":d,"admin":user[0]}
+    res.render("master/deliverylist.ejs",obj);
+})
+route.post("/update-oder-address/:id",async(req,res)=>{
+    let d=await exe(`update order_det set address='${req.body.address}' where id='${req.params.id}'`);
+    res.send("done");
+})
 module.exports=route;

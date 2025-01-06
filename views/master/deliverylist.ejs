@@ -1,0 +1,73 @@
+<%-include('header.ejs')%>
+<div class="container-fluid">
+    <div class="row p-3">
+        <h3>TOTAL DELIVERIES</h3>
+        <div class="col-md-12 rounded bg-light p-4" style="overflow-x: scroll;">
+         <table class="display" id="example">
+          <thead>
+            <tr>
+                <th>Srno</th>
+                <th>Oder Date</th>
+                <th>Driver</th>
+                <th>Address</th>
+                <th>Status</th>
+                <th>Vehical Number</th>
+                <th>Return Date</th>
+                <th>Expense List</th>
+                <th>Order List</th>
+            </tr>
+          </thead>
+          <tbody>
+            <%for(let i=0;i<data.length;i++){%>
+               <tr>
+                <td><%-i+1%></td>
+                <td>
+                    <%-data[i].order_date%>
+                </td>
+                <td>
+                 
+                    <a href="/edit_driver_details/<%-data[i].driver%>"><i class="fa fa-circle-info"></i> <%-data[i].driver_name%></a>
+               
+                </td>
+                <td>
+                    <textarea class="form-control" onchange="setAd('<%-data[i].id%>')" >
+                        <%-data[i].address%>
+                    </textarea>
+                  
+                </td>
+                <td>
+                    <%-data[i].status%>
+                </td>
+                <td>
+                    <a href="/edit_driver_details/ <%-data[i].v_num%>"> <%-data[i].v_num%></a>
+                   
+                </td>
+                <td>
+                    <%-data[i].return_date%>
+                </td>
+                <td>
+                    <a class="btn btn-primary" href="/expense/<%-data[i].id%>">Expense</a>  
+                </td>
+                <td>
+                    <a class="btn btn-primary" href="/order-list/<%-data[i].id%>">Order</a>  
+                </td>
+               </tr> 
+            
+            <%}%>
+          </tbody>
+         </table>
+        </div>
+    </div>
+</div>
+<script>
+    function setAd(id){
+    $.ajax({
+        "method":"post",
+        "url":"/update-oder-address/"+id,
+        "data":{"address":event.target.value}
+    }).done((res)=>{
+        console.log("done");
+    });
+    }
+</script>
+<%-include('footer.ejs')%>
