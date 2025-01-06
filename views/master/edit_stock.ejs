@@ -2,6 +2,7 @@
 <div class="container my-3 bg-white py-3">
     <h3 class="my-3">UPDATE STOCK</h3>
     <form action="/update_stock" method="post" enctype="multipart/form-data" id="myform">
+        <input type="hidden" name="stock_unit" class="form-control" value="<%-data.stock_unit%>">
         <input type="hidden" name="stock_id" value="<%-data.stock_id%>">
         <div class="row">
             <div class="col-md-6">
@@ -9,13 +10,10 @@
                 <input type="text" name="stock_name" class="form-control" value="<%-data.stock_name%>">
             </div>
             <div class="col-md-6">
-                <label class="my-3">Stock Quantity</label>
+                <label class="my-3">Stock Quantity (KG)</label>
                 <input type="number" name="stock_qty" class="form-control" value="<%-data.stock_qty%>">
             </div>
-            <div class="col-md-6">
-                <label class="my-3">Stock Unit</label>
-                <input type="number" name="stock_unit" class="form-control" value="<%-data.stock_unit%>">
-            </div>
+           
             <div class="col-md-6">
                 <label class="my-3">Stock Date</label>
                 <input type="date" name="stock_date" class="form-control" value="<%-data.stock_date%>">

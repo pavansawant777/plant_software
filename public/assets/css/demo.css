@@ -105,3 +105,19 @@
   text-align: center;
   margin-top: 1rem;
 }
+
+@media print {
+label{
+  display: none;
+}  
+
+#example_info{
+  display: none;
+}
+#example_paginate{
+  display: none;
+}
+.btn{
+  display: none;
+}
+}

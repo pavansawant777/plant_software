@@ -1,4 +1,7 @@
 <%-include('header.ejs')%>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+
+
 <div class="container">
     <div class="row p-5">
         <div class="col-md-12 bg-light p-4 rounded ">
@@ -29,6 +32,9 @@
                             <%}%>
                     </tbody>
                 </table>
+
+                <button class="btn btn-primary my-5 float-end" onclick="window.print()">Print</button>
+                <button class="btn btn-success my-5 float-end mx-3" id="vehicalList">Excel</button>
             </div>
         </div>
     </div>
@@ -40,5 +46,20 @@
             location.href='/delete-vehical/'+id;
         }
     }
+    document.getElementById('exportExcel').addEventListener('click', function () {
+       
+       var table = document.getElementById('example');
+
+     
+       var worksheet = XLSX.utils.table_to_sheet(table);
+
+    
+       var workbook = XLSX.utils.book_new();
+       XLSX.utils.book_append_sheet(workbook, worksheet, 'StockList');
+
+     
+       XLSX.writeFile(workbook, 'StockList.xlsx');
+   });
 </script>
+
 <%-include('footer.ejs')%>
