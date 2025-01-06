@@ -1,4 +1,5 @@
 <%- include("header.ejs") %>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 
 <div class="container p-5 ">
     <div class="row p-3 bg-light" style="overflow-x: scroll;">
@@ -55,6 +56,10 @@
             <% } %>
         </tbody>
         </table>
+        
+        <button class="btn btn-primary float-end mt-5" onclick="window.print()">Print</button>
+        <button class="btn btn-success mx-3 float-end mt-5" id="driverList">Excel</button>
+       
     </div>
     </div>
   
@@ -66,5 +71,20 @@
             location.href='/delete_driver_details/'+id;
         }
     }
+
+    document.getElementById('driverList').addEventListener('click', function () {
+       
+       var table = document.getElementById('example');
+
+     
+       var worksheet = XLSX.utils.table_to_sheet(table);
+
+    
+       var workbook = XLSX.utils.book_new();
+       XLSX.utils.book_append_sheet(workbook, worksheet, 'StockList');
+
+     
+       XLSX.writeFile(workbook, 'DriverList.xlsx');
+   });
 </script>
 <%- include("footer.ejs") %>

@@ -4,19 +4,17 @@
         <h3>ADD STOCK</h3>
 
         <form action="/save_stock" method="post" enctype="multipart/form-data" id="myform">
+            <input type="hidden" name="stock_unit" class="form-control" value="0">
             <div class="row">
                 <div class="col-md-6">
                     <label class="my-3">Stock Name</label>
                     <input type="text" name="stock_name" class="form-control">
                 </div>
                 <div class="col-md-6">
-                    <label class="my-3">Stock Quantity</label>
+                    <label class="my-3">Stock Quantity (KG)</label>
                     <input type="number" name="stock_qty" class="form-control">
                 </div>
-                <div class="col-md-6">
-                    <label class="my-3">Stock Unit</label>
-                    <input type="number" name="stock_unit" class="form-control">
-                </div>
+                
                 <div class="col-md-6">
                     <label class="my-3">Stock Date</label>
                     <input type="date" name="stock_date" class="form-control">
