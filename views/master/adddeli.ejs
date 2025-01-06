@@ -1,0 +1,85 @@
+<%-include('header.ejs')%>
+<div class="container">
+    <div class="row p-5">
+        <h3 >ADD DELIVERY</h3>
+        <div class="col-md-12 rounded bg-light p-4">
+        <h4>DILEVERY &  ADDRESS DETAILS </h4>
+           <div class="row">
+            <div class="col-md-6 mb-3">
+                <label class="mb-2">Order Date* :</label>
+                <input type="date" class="form-control" id="oder_date" required/>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label class="mb-2">Driver* :</label>
+              
+                <select class="form-control" required id="driver">
+                   <option value="" disabled selected>Select driver</option>
+                   <%for(let i of driver){%>
+                    <option value="<%-i.driver_details_id%>" ><%-i.driver_name%></option>
+                    <%}%>
+                </select>
+
+            </div>
+            <div class="col-md-12 mb-3">
+                <label class="mb-2">Order Address* :</label>
+             
+                <textarea rows="5" class="form-control" id="addr" required></textarea>
+            </div>
+
+           </div>
+        </div>
+        <div class="col-md-12 rounded bg-light p-4 mt-5" >
+            <table class="table table-striped">
+                <tr>
+                    <th>Product</th>
+                    <th>Qauntity</th>
+                   
+                    <th>
+                        <button class="btn btn-primary" onclick="addRow()">+</button>
+                    </th>
+                </tr>
+                <tbody id="tbody">
+
+                </tbody>
+            
+                
+            </table>
+        </div>
+    </div>
+</div>
+<script>
+     let j=0;
+    function addRow(){
+       
+        $("#tbody").append(`
+          <tr>
+            <td>
+                <select name="product" id="product-${j}" onchange="setProduct()" class="form-control">
+                    <option value="" selected disabled>Select product</option>
+                  <%for(let i of product){%>
+                   <option value="<%-i.stock_id%>" ><%-i.stock_name%></option>
+                  
+                  <%}%>
+                  
+                    </select>
+                
+                </td>
+                <td>
+                    <input type="number" placeholder="Quantity" id="qty-${j}" class="form-control" name="qty" >
+                    </td>
+                 
+                        <td>
+                            <button class="btn btn-danger" onclick="deleteRow()"><i class="fa fa-trash"></i></button>
+                            </td>
+            </tr>
+       
+        `)
+        j++;
+    }
+
+function deleteRow(){
+    event.target.closest('tr').remove();
+}
+
+</script>
+<%-include('footer.ejs')%>

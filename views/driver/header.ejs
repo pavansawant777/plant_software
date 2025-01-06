@@ -152,14 +152,14 @@
           <ul class="menu-inner py-1">
             <!-- Dashboard -->
             <li class="menu-item active" id="dash">
-              <a href="/" class="menu-link">
+              <a href="/driver" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-home-circle"></i>
                 <div data-i18n="Analytics">Dashboard</div>
               </a>
             </li>
 
             <!-- Layouts -->
-            <li class="menu-item " id="driv-main">
+            <!-- <li class="menu-item " id="driv-main">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="fa fa-user menu-icon tf-icons "></i>
                 <div data-i18n="Layouts">Driver</div>
@@ -184,7 +184,7 @@
 
             <li class="menu-item " id="stock-main">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="fa-solid fa-box menu-icon tf-icons"></i>
+                <i class="fa fa-boxes menu-icon tf-icons "></i>
                 <div data-i18n="Layouts">Stock</div>
               </a>
 
@@ -205,19 +205,19 @@
               </ul>
             </li>
 
-            <li class="menu-item " id="del-main">
+            <li class="menu-item " id="veh-main">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="fa fa-truck menu-icon tf-icons "></i>
-                <div data-i18n="Layouts">Delivery</div>
+                <i class="fa fa-car menu-icon tf-icons "></i>
+                <div data-i18n="Layouts">Vehical</div>
               </a>
 
               <ul class="menu-sub" >
-                <li class="menu-item " id="del-sub-add">
-                  <a href="/add-delivery" class="menu-link">
-                    <div data-i18n="Without menu">Add Delivery</div>
+                <li class="menu-item " id="veh-sub-add">
+                  <a href="/add-vehical" class="menu-link">
+                    <div data-i18n="Without menu">Add Vehical</div>
                   </a>
                 </li>
-                <li class="menu-item"  id="del-sub-list">
+                <li class="menu-item"  id="veh-sub-list">
                   <a href="/vehical-list" class="menu-link">
                     <div data-i18n="Without navbar">Vehical List</div>
 
@@ -225,28 +225,8 @@
                 </li>
 
                 </ul>
-                </li>
-                <li class="menu-item " id="veh-main">
-                  <a href="javascript:void(0);" class="menu-link menu-toggle">
-                    <i class="fa fa-car menu-icon tf-icons "></i>
-                    <div data-i18n="Layouts">Vehical</div>
-                  </a>
-    
-                  <ul class="menu-sub" >
-                    <li class="menu-item " id="veh-sub-add">
-                      <a href="/add-vehical" class="menu-link">
-                        <div data-i18n="Without menu">Add Vehical</div>
-                      </a>
-                    </li>
-                    <li class="menu-item"  id="veh-sub-list">
-                      <a href="/vehical-list" class="menu-link">
-                        <div data-i18n="Without navbar">Vehical List</div>
-    
-                      </a>
-                    </li>
-    
-                    </ul>
-                    </li>
+                </li> -->
+
            
 
           </ul>
@@ -285,13 +265,24 @@
 
               <ul class="navbar-nav flex-row align-items-center ms-auto">
                 <!-- Place this tag where you want the button to render. -->
-                
+                <li class="nav-item lh-1 me-3">
+                  <a
+                    class="github-button"
+                    href="https://github.com/themeselection/sneat-html-admin-template-free"
+                    data-icon="octicon-star"
+                    data-size="large"
+                    data-show-count="true"
+                    aria-label="Star themeselection/sneat-html-admin-template-free on GitHub"
+                    >Star</a
+                  >
+                </li>
 
                 <!-- User -->
                 <li class="nav-item navbar-dropdown dropdown-user dropdown">
                   <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
+                    
                     <div class="avatar avatar-online">
-                      <img src="../images/<%-admin.image%>" alt class="w-px-40 h-auto rounded-circle" />
+                      <img src="/images/<%-driver.driver_image%>" alt class="w-px-40 h-auto rounded-circle" />
                     </div>
                   </a>
                   <ul class="dropdown-menu dropdown-menu-end">
@@ -300,12 +291,12 @@
                         <div class="d-flex">
                           <div class="flex-shrink-0 me-3">
                             <div class="avatar avatar-online">
-                              <img src="../images/<%-admin.image%>" alt class="w-px-40 h-auto rounded-circle" />
+                              <img src="/images/<%-driver.driver_image%>" alt class="w-px-40 h-auto rounded-circle" />
                             </div>
                           </div>
                           <div class="flex-grow-1">
-                            <span class="fw-semibold d-block"><%-admin.name%></span>
-                            <small class="text-muted">Admin</small>
+                            <span class="fw-semibold d-block"><%-driver.driver_name%></span>
+                            <small class="text-muted">Driver</small>
                           </div>
                         </div>
                       </a>
@@ -314,23 +305,18 @@
                       <div class="dropdown-divider"></div>
                     </li>
                     <li>
-                      <a class="dropdown-item" href="/admin-profile">
+                      <a class="dropdown-item" href="/driver/driver-profile">
                         <i class="bx bx-user me-2"></i>
                         <span class="align-middle">My Profile</span>
                       </a>
                     </li>
-                    <li>
-                      <a class="dropdown-item" href="/add-admin">
-                        <i class="fa fa-plus me-2"></i>
-                        <span class="align-middle">New Admin</span>
-                      </a>
-                    </li>
+                 
                  
                     <li>
                       <div class="dropdown-divider"></div>
                     </li>
                     <li>
-                      <a class="dropdown-item" href="/logout">
+                      <a class="dropdown-item" href="/driver/logout">
                         <i class="bx bx-power-off me-2"></i>
                         <span class="align-middle">Log Out</span>
                       </a>

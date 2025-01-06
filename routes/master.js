@@ -308,6 +308,16 @@ route.get("/add_stock",validateAdmin,async function(req,res){
      res.send("<script>confirm('Are you Sure');location.href=document.referrer;</script>")
 
  })
+ route.get("/add-delivery",validateAdmin,async(req,res)=>{
+    let user=await exe(`select*from admin where id='${req.session.mid}'`);
+    let stock=await exe(`select*from stock where stock_qty>0`);
+    let driver=await exe(`select*from driver_details where driver_available_status='true'`);
+    var obj ={"admin":user[0],
+        "product":stock,
+        "driver":driver
+    }
+    res.render("master/adddeli.ejs",obj);
+ })
 
 
 route.get("/add_stock",validateAdmin,async function(req,res){
