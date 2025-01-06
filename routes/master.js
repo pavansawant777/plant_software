@@ -233,11 +233,6 @@ route.post("/update-car/:id",async(req,res)=>{
      let data=await exe(`update vehical set name='${d.name}',number='${d.number}',image='${d.image}',isAvilable='${d.isAvilable}' where id='${req.params.id}'`);
 
 
-<<<<<<< Updated upstream
- 
-=======
-
->>>>>>> Stashed changes
 
     }
     else{
