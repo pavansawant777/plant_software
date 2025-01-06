@@ -1,8 +1,11 @@
 <%-include('header.ejs')%>
-<div class="container-fluid">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+
+<div class="container-fluid py-5">
     <div class="row p-3">
-        <h3>TOTAL DELIVERIES</h3>
-        <div class="col-md-12 rounded bg-light p-4" style="overflow-x: scroll;">
+        
+        <div class="col-md-12 rounded bg-light p-4 table-responsive" style="overflow-x: scroll;">
+            <h3>TOTAL DELIVERIES</h3>
          <table class="display" id="example">
           <thead>
             <tr>
@@ -56,6 +59,11 @@
             <%}%>
           </tbody>
          </table>
+
+         <button class="btn btn-primary float-end mt-5" onclick="window.print()">Print</button>
+
+         <button id="totdel" class="btn btn-success float-end mt-5 mx-3"> Excel</button>
+         
         </div>
     </div>
 </div>
@@ -69,5 +77,19 @@
         console.log("done");
     });
     }
+    document.getElementById('totdel').addEventListener('click', function () {
+       
+       var table = document.getElementById('example');
+
+     
+       var worksheet = XLSX.utils.table_to_sheet(table);
+
+    
+       var workbook = XLSX.utils.book_new();
+       XLSX.utils.book_append_sheet(workbook, worksheet, 'StockList');
+
+     
+       XLSX.writeFile(workbook, 'StockList.xlsx');
+   });
 </script>
 <%-include('footer.ejs')%>
