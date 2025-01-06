@@ -1,9 +1,51 @@
 <%-include('header.ejs')%>
 <div class="container">
-    <div class="row">
-        <div class="col-md-12">
-            <h1><%-admin.name%></h1>
+    <div class="row my-5">
+        <div class="col-md-3 p-2">
+            <div class="card card-body  py-3 w-100">
+                <div class="row ">
+                    <div class="hstack gap-3">
+                        <img src="/images/delivery-boy.png" height="60" width="auto">
+                        <div class="vr"></div>
+                        <div class=" text-center jusitfy-content-center">
+                            <h4>Total Drivers</h4>
+                            <h3><%-driver.ttl%></h3>
+                           </div>
+                      </div>
+                </div>
+            </div>
         </div>
+
+        <div class="col-md-3 p-2">
+            <div class="card card-body  py-3 w-100">
+                <div class="row ">
+                    <div class="hstack gap-3">
+                        <img src="/images/packages.png" height="60" width="auto">
+                        <div class="vr"></div>
+                        <div class=" text-center jusitfy-content-center">
+                            <h4>Total Stock</h4>
+                            <h3><%-stock.ttl_stk%></h3>
+                           </div>
+                      </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 p-2">
+            <div class="card card-body  py-3 w-100">
+                <div class="row ">
+                    <div class="hstack gap-3">
+                        <img src="/images/cargo-truck.png" height="60" width="auto">
+                        <div class="vr"></div>
+                        <div class=" text-center jusitfy-content-center">
+                            <h4>Total Vehical</h4>
+                            <h3><%-vehical.ttl_vehical%></h3>
+                           </div>
+                      </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 </div>
 <%-include('footer.ejs')%>

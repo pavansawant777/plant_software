@@ -13,9 +13,15 @@ res.render('master/login.ejs');
 }
 
 route.get("/",validateAdmin,async(req,res)=>{
+    var driver = await exe( `select count(*) as ttl from driver_details`)
+    var stock = await exe(`select count(*) as ttl_stk from stock `)
+    var vehical = await exe(`select count(*) as ttl_vehical from vehical`)
     let user=await exe(`select*from admin where id='${req.session.mid}'`);
     let obj={
-    "admin": user[0]
+    "admin": user[0],
+    "driver":driver[0],
+"stock":stock[0],
+"vehical":vehical[0]
    }
 res.render("master/index.ejs",obj);
 });
@@ -227,7 +233,11 @@ route.post("/update-car/:id",async(req,res)=>{
      let data=await exe(`update vehical set name='${d.name}',number='${d.number}',image='${d.image}',isAvilable='${d.isAvilable}' where id='${req.params.id}'`);
 
 
+<<<<<<< Updated upstream
  
+=======
+
+>>>>>>> Stashed changes
 
     }
     else{
@@ -314,4 +324,68 @@ route.get("/add_stock",validateAdmin,async function(req,res){
     res.render("master/adddeli.ejs",obj);
  })
 
+
+route.get("/add_stock",validateAdmin,async function(req,res){
+
+    let user=await exe(`select*from admin where id='${req.session.mid}'`);
+
+     let obj={
+         
+         "admin":user[0]
+     }
+     res.render("master/add_stock.ejs",obj)
+ })
+
+ route.post("/save_stock",async function(req,res){
+     var d = req.body
+
+     var sql = `insert into stock(stock_name,stock_qty,stock_unit,stock_date)values(?,?,?,?)`
+
+     var data = await exe(sql,[d.stock_name,d.stock_qty,d.stock_unit,d.stock_date])
+
+     // res.send(data)
+     res.redirect("/add_stock")
+ })
+
+ route.get("/stock_list",validateAdmin,async function(req,res){
+     let user=await exe(`select*from admin where id='${req.session.mid}'`);
+
+     var sql =  `select*from stock`
+     var data = await exe(sql)
+
+     var obj = {"stock":data,"admin":user[0]}
+     
+     res.render("master/stock_list.ejs",obj)
+ })
+
+ route.get("/edit_stock/:id",validateAdmin,async function(req,res){
+     let user=await exe(`select*from admin where id='${req.session.mid}'`);
+
+     var sql =`select*from stock where stock_id  = '${req.params.id}'`
+
+     var data = await exe(sql)
+
+     var obj ={"data":data[0],"admin":user[0]}
+     res.render("master/edit_stock.ejs",obj)
+ })
+
+ route.post("/update_stock",async function(req,res){
+     var d = req.body
+     var sql = `update stock set stock_name = '${d.stock_name}', stock_qty = '${d.stock_qty}',stock_unit = '${d.stock_unit}',stock_date='${d.stock_date}' where stock_id = '${d.stock_id}'`
+     
+     var data = await exe(sql)
+
+     // res.send(data)
+     res.redirect("/stock_list")
+
+ })
+
+ route.get("/delete_stock/:id",async function(req,res){
+
+     var data =await exe(`delete from stock where stock_id = '${req.params.id}'`)
+
+     // res.redirect("/stock_list")
+     res.send("<script>confirm('Are you Sure');location.href=document.referrer;</script>")
+
+ })
 module.exports=route;
