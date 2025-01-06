@@ -407,4 +407,10 @@ route.post("/update-oder-address/:id",async(req,res)=>{
     let d=await exe(`update order_det set address='${req.body.address}' where id='${req.params.id}'`);
     res.send("done");
 })
+route.get("/order-list/:id",validateAdmin,async(req,res)=>{
+ let d=await exe(`select*,(select stock_name from stock where stock.stock_id=order_list.product) as product_name from order_list where order_id='${req.params.id}'`);
+    let user=await exe(`select*from admin where id='${req.session.mid}'`);
+    var obj ={"data":d,"admin":user[0]}
+    res.render("master/oderlist.ejs",obj);
+})
 module.exports=route;

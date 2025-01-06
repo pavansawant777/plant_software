@@ -1,0 +1,33 @@
+<%-include('header.ejs')%>
+<div class="container">
+    <div class="row p-4">
+        <div class="col-md-12 bg-light rounded p-4">
+            <h3>ORDER LIST</h3>
+
+            <button class="btn btn-primary btn-sm" onclick="history.back()"><i class="fa fa-arrow-left"></i></button>
+        <table class="table table-striped mt-3">
+            <tr>
+                <th>SrNo</th>
+                <th>Product</th>
+                <th>Quantity</th>
+
+            </tr>
+            <%for(let i=0;i<data.length;i++){%>
+        <tr>
+            <td>
+                <%-i+1%>
+            
+            </td>
+            <td>
+
+                <%-data[i].product_name%></td>
+            <td><%-data[i].qty%></td>
+        </tr>
+        <%}%>
+        </table>
+        </div>
+        
+    </div>
+</div>
+
+<%-include('footer.ejs')%>
