@@ -74,4 +74,5 @@ route.get("/task",validateDriver,async(req,res)=>{
     }
     res.render("driver/task.ejs",obj);
 })
+
 module.exports=route;

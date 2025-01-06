@@ -1,13 +1,63 @@
 <%-include('header.ejs')%>
 <div class="container">
     <div class="row p-4">
-        <div class="col-md-12 rounded p-3 bg-light">
-         <strong style="font-size: 14px;"><%-data.order_date%></strong></br>
-        </br>
+        <div class="col-md-12 rounded p-3 bg-light" style="overflow-x: scroll;">
+            <h4>ASSINGED TASK</h4>
+         <strong style="font-size: 14px;">Order Date</strong></br>
+        <p><%-data.order_date%></p>
          <strong style="font-size: 14px;">Address :</strong>
          <p><%-data.address%></p>
-         <strong style="font-size: 14px;">Address :</strong>
+         <strong style="font-size: 14px;">Status:</strong>
          <p><%-data.status%></p>
+         <table class="table table-striped">
+            <tr>
+                <th>SrNo</th>
+                <th>Product</th>
+                <th>Quantity</th>
+            </tr>
+            <%for(let i=0;i<order.length;i++){%>
+                <tr>
+                    <td>
+                        <%-i+1%>
+                    
+                    </td>
+                    <td>
+        
+                        <%-order[i].product_name%></td>
+                    <td><%-order[i].qty%></td>
+                </tr>
+                <%}%>
+         </table>
+         <div class="w-100 text-center">
+            <%if(data.vehical!=null){%>
+            <%if(data.status=='pending'){%>
+                <a class="btn btn-success" href="/driver/update-task-status/dispatched"  >Start</a>
+
+            <%}%>
+            <% if(data.status=='dispatched'){%>
+                <a class="btn btn-success" href="/driver/update-task-status/delivered">Delivered</a>
+
+
+            <%}%>
+            <% if(data.status=='delivered'){%>
+                <a class="btn btn-success" href="/driver/update-task-status/return">Return</a>
+
+
+                <%}%>
+                <%if(data.status=='return'){%>
+                    <a class="btn btn-success" href="/driver/update-task-status/completed">Complete</a>
+
+
+                    <%}%>
+                    <%}%>
+
+                   
+                    <%if(data.vehical==null){%>
+                        <a href="/driver/pick-vehical/<%-data.id%>" class="btn btn-primary">Pick Vehical</a>
+                        
+                        <%}%>
+                        <a href="/driver/expense/<%-data.id%>/<%-driver.driver_details_id%>" class="btn btn-primary">Expense</a>
+         </div>
         </div>
     </div>
 </div>
