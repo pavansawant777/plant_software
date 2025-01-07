@@ -95,7 +95,7 @@ route.get("/pick-vehical/:oid/:vid",validateDriver,async(req,res)=>{
 })
 route.get("/update-task-status/:oid/:st",validateDriver,async(req,res)=>{
     if(req.params.st=="completed"){
-       let veh=await exe(`select*from order_det where id='${req.params.oid}'`);
+       let veh=await exe(`select*from order_det where  id='${req.params.oid}'`);
         let d=await exe(`update order_det set status='${req.params.st}',return_date='${new Date().toISOString().slice(0,10)}' where id='${req.params.oid}'`);
         let driver=await exe(`update driver_details set driver_available_status='true'`);
          let vehical=await exe(`update vehical set isAvilable='true' where id='${veh[0].vehical}'`);
