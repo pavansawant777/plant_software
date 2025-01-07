@@ -9,7 +9,7 @@ next();
 }
 else{
 res.render('master/login.ejs');
-}
+}                                                                              
 }
 
 route.get("/",validateAdmin,async(req,res)=>{
@@ -429,4 +429,5 @@ route.get("/order-list/:id",validateAdmin,async(req,res)=>{
     var obj ={"data":d,"admin":user[0]}
     res.render("master/oderlist.ejs",obj);
 })
+
 module.exports=route;
