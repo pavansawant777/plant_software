@@ -80,6 +80,10 @@
         j++;
 toggleBtn()
     }
+
+
+
+    
 function toggleBtn(){
 if(j>0){
 document.getElementById("subbtn").disabled=false;
@@ -104,7 +108,7 @@ function sendData(){
     }
     let pro=document.getElementsByName("product");
     let qty=document.getElementsByName("qty");
-    for(let i of ){
+    for(let i of pro){
         obj.product.push(i.value);
     }
     for(let i of qty){
@@ -119,4 +123,4 @@ function sendData(){
     })
 }
 </script>
-<%-include('footepror.ejs')%>
+<%-include('footer.ejs')%>
