@@ -146,4 +146,10 @@ route.get("/order-list/:id",validateDriver,async(req,res)=>{
        var obj ={"data":d,"driver":driver[0]}
        res.render("driver/orderlist.ejs",obj);
    })
+   route.get("/expense/:id",validateDriver,async(req,res)=>{
+    let driver=await exe(`select*from driver_details where driver_details_id='${req.session.did}'`);
+
+    var obj ={"driver":driver[0]}
+    res.render("driver/expense.ejs",obj);
+   })
 module.exports=route;

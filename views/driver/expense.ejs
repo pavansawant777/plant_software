@@ -1,0 +1,55 @@
+<%-include('header.ejs')%>
+<div class="container">
+    <div class="row p-5">
+        <div class="col-md-12 rounded bg-light p-4">
+        <h3>ADD EXPENSE</h3>
+        <div class="row">
+            <div class="col-md-4 mb-3">
+                <label class="mb-2">Expense for* :</label>
+                <input type="text" name="expense_for" required class="form-control">
+            </div>
+            <div class="col-md-4 mb-3">
+                <label class="mb-2">Invoice Image :</label>
+                <input type="file" accept="image/*" name="img" required class="form-control">
+            </div>
+            <div class="col-md-4 mb-3">
+                <label class="mb-2">Amount (in &#8377;)* :</label>
+                <input type="number"  name="amount" required class="form-control">
+            </div>
+            <div class="col-md-4 mb-3">
+                <label class="mb-2">Time* :</label>
+                <input type="time"  name="time" id="timeInput" required class="form-control">
+            </div>
+            <div class="col-md-4 mb-3">
+                <label class="mb-2">Date* :</label>
+                <input type="date"  name="date" id="dateInput" required class="form-control">
+            </div>
+            <div class="col-md-12 mt-2 text-center">
+            <button class="btn btn-primary">Save</button>
+            </div>
+        </div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    // Get the current time
+    const now = new Date();
+    const hours = String(now.getHours()).padStart(2, '0');
+    const minutes = String(now.getMinutes()).padStart(2, '0');
+
+    // Set the value of the input to the current time
+    document.getElementById('timeInput').value = `${hours}:${minutes}`;
+  </script>
+    <script>
+        // Get the current date
+      
+        const year = now.getFullYear();
+        const month = String(now.getMonth() + 1).padStart(2, '0'); // Months are zero-based
+        const day = String(now.getDate()).padStart(2, '0');
+    
+        // Set the value of the input to the current date
+        document.getElementById('dateInput').value = `${year}-${month}-${day}`;
+      </script>
+<%-include('footer.ejs')%>
