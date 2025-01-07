@@ -2,7 +2,7 @@ let express=require('express');
 let route=express.Router();
 let exe=require("./connection");
 function validateDriver(req,res,next){
-    req.session.did=1;
+    req.session.did=19;
     if(req.session.did){
 next();
     }
@@ -109,9 +109,14 @@ route.get("/update-task-status/:oid/:st",validateDriver,async(req,res)=>{
 route.post("/save-return",async(req,res)=>{
     let d=req.body;
     let da=await exe(`update order_det set status='return' where id='${d.order_id}'`);
+    if(d.product){
     for(let i=0;i<d.product.length;i++){
         let a=await exe(`insert into return_product(product,qty,order_id) values('${d.product[i]}','${d.qty[i]}','${d.order_id}')`);
     }
+}
+else{
+    let a=await exe(`insert into return_product(product,qty,order_id) values('','','')`);
+}
     res.send('1');
 })
 route.get("/return-item/:id",validateDriver,async(req,res)=>{

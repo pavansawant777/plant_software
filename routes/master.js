@@ -411,6 +411,14 @@ route.get("/delivery-list",validateAdmin,async(req,res)=>{
     var obj ={"data":d,"admin":user[0]}
     res.render("master/deliverylist.ejs",obj);
 })
+
+route.get("/delete-order/:oid/:did",validateAdmin,async function(req,res){
+
+    var sql = await exe(`delete from order_det where id='${req.params.oid}'`)
+    var sql1 = await exe(`update driver_details set driver_available_status ='true' where driver_details_id = '${req.params.did}' `)
+
+    res.redirect("/delivery-list")
+})
 route.post("/update-oder-address/:id",async(req,res)=>{
     let d=await exe(`update order_det set address='${req.body.address}' where id='${req.params.id}'`);
     res.send("done");
