@@ -1,0 +1,25 @@
+<%-include('header.ejs')%>
+<div class="container">
+    <div class="row p-5">
+        <div class="col-md-12 p-4 rounded bg-light">
+            <h3>RETURN ORDER LIST</h3>
+            <button class="btn btn-primary btn-sm" onclick="history.back()"><i class="fa fa-arrow-left"></i></button>
+            <table class="table table-striped ">
+                <tr>
+                    <th>SrNo</th>
+                    <th>Product</th>
+                    <th>Quantity</th>
+                </tr>
+                <%for(let i=0;i<order.length;i++){%>
+                    <tr>
+                        <td><%-i+1%></td>
+                    <td><%-order[i].product%></td>
+                    <td><%-order[i].qty%></td>
+                    </tr>
+                    
+                    <%}%>
+            </table>
+        </div>
+    </div>
+</div>
+<%-include('footer.ejs')%>

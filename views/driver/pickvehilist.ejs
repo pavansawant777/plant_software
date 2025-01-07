@@ -1,0 +1,35 @@
+<%-include('header.ejs')%>
+<div class="container">
+    <div class="row p-5">
+        <div class="col-md-12 rounded bg-white p-4">
+        <h3>PICK VEHICAL</h3>
+        <table class="display" id="example">
+        <thead>
+            <th>Srno</th>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Number</th>
+            <th></th>
+        </thead>
+        <tbody>
+            <%for(let i=0;i<vehi.length;i++){%>
+                <tr>
+                <td><%-i+1%></td>
+<td>
+<img src="/images/<%-vehi[i].image%>" alt="vehical" style="height: 100px;width: 140px;">
+</td>
+<td><%-vehi[i].name%></td>
+<td><%-vehi[i].number%></td>
+<td>
+<a href="/driver/pick-vehical/<%-oid%>/<%-vehi[i].id%>" class="btn btn-success">Pick</a>
+</td>
+                </tr>
+                
+                <%}%>
+        </tbody>
+        
+        </table>
+        </div>
+    </div>
+</div>
+<%-include('footer.ejs')%>

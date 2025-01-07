@@ -1,14 +1,36 @@
 <%-include('header.ejs')%>
 <div class="container">
     <div class="row p-4">
+        <%if(order!=""){%>
         <div class="col-md-12 rounded p-3 bg-light" style="overflow-x: scroll;">
             <h4>ASSINGED TASK</h4>
-         <strong style="font-size: 14px;">Order Date</strong></br>
-        <p><%-data.order_date%></p>
+            <div class="row">
+                <div class="col-md-2">
+                    <strong style="font-size: 14px;">Status:</strong>
+                    <p><%-data.status%></p>
+                </div>
+                <div class="col-md-2">
+                    <strong style="font-size: 14px;">Order Date</strong></br>
+                    <p><%-data.order_date%></p>
+                </div>
+                <div class="col-md-3">
+                    <strong style="font-size: 14px;">Vehical:</strong>
+         <p><%-data.v_num%></p>
+                </div>
+                <div class="col-md-3">
+                    <strong style="font-size: 14px;">Return Date:</strong>
+         <p><%-data.return_date%></p>
+                </div>
+                <div class="col-md-2">
+                    <strong style="font-size: 14px;">Return Item:</strong>
+         <a href="/driver/return-item/<%-data.id%>" class="btn btn-primary btn-sm"><i class=" fa fa-list"></i> list</a>
+                </div>
+            </div>
+        
          <strong style="font-size: 14px;">Address :</strong>
          <p><%-data.address%></p>
-         <strong style="font-size: 14px;">Status:</strong>
-         <p><%-data.status%></p>
+      
+         
          <table class="table table-striped">
             <tr>
                 <th>SrNo</th>
@@ -31,21 +53,52 @@
          <div class="w-100 text-center">
             <%if(data.vehical!=null){%>
             <%if(data.status=='pending'){%>
-                <a class="btn btn-success" href="/driver/update-task-status/dispatched"  >Start</a>
+                <a class="btn btn-success" href="/driver/update-task-status/<%-data.id%>/dispatched"  >Start</a>
 
             <%}%>
             <% if(data.status=='dispatched'){%>
-                <a class="btn btn-success" href="/driver/update-task-status/delivered">Delivered</a>
+                <a class="btn btn-success" href="/driver/update-task-status/<%-data.id%>/delivered">Delivered</a>
 
 
             <%}%>
             <% if(data.status=='delivered'){%>
-                <a class="btn btn-success" href="/driver/update-task-status/return">Return</a>
-
+                <!-- <a class="btn btn-success" href="/driver/update-task-status/return">Return</a> -->
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    Return
+  </button>
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Return Products</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <table class="table table-striped">
+            <tr>
+                <th>Product Name</th>
+                <th>Quantity </th>
+                <th><button class="btn btn-primary" onclick="addRow()">+</button></th>
+            </tr>
+            <tbody id="tbody">
+                
+            </tbody>
+          </table>
+        </div>
+        <div class="modal-footer">
+    
+          <button type="button" class="btn btn-success" onclick="sendData('<%-data.id%>')">Procceed</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
                 <%}%>
                 <%if(data.status=='return'){%>
-                    <a class="btn btn-success" href="/driver/update-task-status/completed">Complete</a>
+                    <a class="btn btn-success" href="/driver/update-task-status/<%-data.id%>/completed">Complete</a>
 
 
                     <%}%>
@@ -59,6 +112,55 @@
                         <a href="/driver/expense/<%-data.id%>/<%-driver.driver_details_id%>" class="btn btn-primary">Expense</a>
          </div>
         </div>
+        <%}else{%>
+        <div class="col-md-12 p-3 pb-0 alert alert-warning">
+            <h5 class="text-center mb-0 pb-3">No Assigned task for you</h5>
+        </div>
+        <%}%>
+
     </div>
 </div>
+<script>
+    function addRow(){
+        $("#tbody").append(`<tr>
+                    <td>
+                        <input type="text" class="form-control" name="product"/>
+
+                    </td>
+                    <td>
+                        <input type="number" class="form-control" name="qty"/>
+                    </td>
+                    <td>
+                        <button class="btn btn-danger" onclick="delRow()">
+                            <i class="fa fa-trash"></i>
+                        </button>
+                    </td>
+                </tr>`);
+    }
+    function delRow(){
+        event.target.closest('tr').remove();
+    }
+    function sendData(id){
+        let obj={
+            "order_id":id,
+            "product":[],
+            "qty":[]
+        }
+        let name=document.getElementsByName("product");
+        let qty=document.getElementsByName("qty");
+        for(let n of name){
+            obj.product.push(n.value);
+        }
+        for(let n of qty){
+            obj.qty.push(n.value);
+        }
+        $.ajax({
+            "method":"post",
+            "url":"/driver/save-return",
+            "data":obj
+        }).done((res)=>{
+            location.reload();
+        })
+    }
+</script>
 <%-include('footer.ejs')%>
