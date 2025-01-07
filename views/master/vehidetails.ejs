@@ -8,7 +8,7 @@
                     <img src="/images/<%-vehi.image%>" style="height: 100px; width: 150px;" class="shadow" id="img"/>
                 </div>
                 <div class="mb-3 col-md-4">
-                    <form action="/update-car/<%-vehi.id%>"  method="post" enctype="multipart/form-data" >
+                    <form action="/update-car/<%-vehi.id%>"  method="post" enctype="multipart/form-data" id="myform" >
 
                  
                     <label class="mb-2">Vehical Image* :</label>
@@ -31,7 +31,7 @@
                     </select>
                 </div>
                 <div class="col-md-12 mt-2 text-center">
-                    <button class="btn btn-primary" type="submit">Update Details</button>
+                    <button class="btn btn-primary" type="submit" onclick="submitForm()">Update Details</button>
                 </form>
                 </div>
             
@@ -44,6 +44,16 @@
         document.getElementById("img").setAttribute("src", URL.createObjectURL(event.target.files[0]))
     
     }
+
+    function submitForm(){
+    let r=confirm('Edit Vehical ?');
+    if(r==true){
+        document.getElementById("myform").submit();
+    }
+    }
+
+    
+
 </script>
 
 

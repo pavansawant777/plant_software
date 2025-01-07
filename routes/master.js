@@ -18,7 +18,7 @@ route.get("/",validateAdmin,async(req,res)=>{
     var vehical = await exe(`select count(*) as ttl_vehical from vehical`)
     var vd = await exe(`select count(*) as ttlvd from order_det`)
     var vdp = await exe(`select count(*) as ttlp from order_det where status='pending' `)
-    var vda = await exe(`select count(*) as ttla from order_det where status='approved' `)
+    var vda = await exe(`select count(*) as ttla from order_det where status='completed' `)
    
     let user=await exe(`select*from admin where id='${req.session.mid}'`);
     let obj={
@@ -314,7 +314,7 @@ route.get("/add_stock",validateAdmin,async function(req,res){
      var data =await exe(`delete from stock where stock_id = '${req.params.id}'`)
 
      // res.redirect("/stock_list")
-     res.send("<script>confirm('Are you Sure');location.href=document.referrer;</script>")
+     res.redirect("/stock_list")
 
  })
  route.get("/add-delivery",validateAdmin,async(req,res)=>{
