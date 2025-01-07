@@ -29,7 +29,7 @@
                                 <button class="btn btn-sm btn-primary">Edit</button>
                             </a>
                             <a href="/delete_stock/<%-row.stock_id%>">
-                                <button class="btn btn-sm btn-danger">Delete</button>
+                                <button class="btn btn-sm btn-danger" onclick="deletestock()">Delete</button>
                             </a>
                             
                         </th>
@@ -67,6 +67,14 @@
       
         XLSX.writeFile(workbook, 'StockList.xlsx');
     });
+
+    function deletestock(id){
+        let r=confirm('Delete Stock ?');
+        if(r==true){
+            location.href='/delete_stock/'+id;
+        }
+    }
+    
 </script>
 
 

@@ -21,7 +21,9 @@
                     <tbody>
                         <%for(let i of vehi){%>
                             <tr>
-                                <td><a href="/edit-vehical/<%-i.id%>"><i class="fa fa-edit"></i></a></td>
+                                <td><a href="/edit-vehical/<%-i.id%>">
+                                    <button class="btn btn-primary"><i class="fa fa-edit"></i></button>
+                                </a></td>
                                 <td><img src="/images/<%-i.image%>" style="height: 100px;width: 150px;" alt="vehical image"></td>
                                 <td><%-i.name%></td>
                                 <td><%-i.number%></td>
@@ -46,6 +48,7 @@
             location.href='/delete-vehical/'+id;
         }
     }
+
     document.getElementById('exportExcel').addEventListener('click', function () {
        
        var table = document.getElementById('example');
@@ -60,6 +63,8 @@
      
        XLSX.writeFile(workbook, 'StockList.xlsx');
    });
+
+  
 </script>
 
 <%-include('footer.ejs')%>
