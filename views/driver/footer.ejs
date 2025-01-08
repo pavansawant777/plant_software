@@ -121,6 +121,12 @@
   }
 
   changeActiveMenu();
+  function addClasses(){
+    for(let i of document.getElementsByTagName('h3')){
+      i.classList.add('text-primary');
+    }
+  }
+  addClasses();
 </script>
 </body>
 </html>

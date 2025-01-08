@@ -1,0 +1,114 @@
+<%-include('header.ejs')%>
+<div class="container">
+    <div class="row p-5">
+        <div class="col-md-12 rounded bg-light p-4">
+        <h3>ADD EXPENSE</h3>
+        <div class="row">
+            <div class="col-md-4 mb-3">
+                <form method="post" enctype="multipart/form-data" action="/driver/save-expense/<%-oid%>" id="myform">
+
+          
+                <label class="mb-2">Expense for* :</label>
+                <input type="text" name="expense_for" required class="form-control">
+            </div>
+            <div class="col-md-4 mb-3">
+                <label class="mb-2">Invoice Image :</label>
+                <input type="file" accept="image/*" name="img" required class="form-control">
+            </div>
+            <div class="col-md-4 mb-3">
+                <label class="mb-2">Amount (in &#8377;)* :</label>
+                <input type="number"  name="amount" required class="form-control">
+            </div>
+            <div class="col-md-4 mb-3">
+                <label class="mb-2">Time* :</label>
+                <input type="time" min="00:00" max="23:59"  name="time" id="timeInput" required class="form-control">
+            </div>
+            <div class="col-md-4 mb-3">
+                <label class="mb-2">Date* :</label>
+                <input type="date"  name="date" id="dateInput" required class="form-control">
+            </div>
+            <div class="col-md-12 mt-2 text-center">
+            <button class="btn btn-primary" type="button" onclick="submitForm()">Save</button>
+        </form>
+            </div>
+        </div>
+
+        </div>
+        <div class="col-md-12 mt-5 rounded bg-light p-4" style="overflow-x: scroll;">
+       <h3>EXPENSE LIST</h3>
+            <table class="table table-spriped mt-3">
+            <tr>
+                <th>Srno</th>
+                <th>Expense For</th>
+                <th>Amount</th>
+                <th>Time</th>
+                <th>Date</th>
+                <th>Invoice</th>
+            </tr>
+            <%for(let i=0;i<exp.length;i++){%>
+                <tr>
+                <td>
+                    <%-i+1%>
+                
+                </td>
+<td>
+    <%-exp[i].expense_for%>
+</td>
+<td>
+  &#8377;  <%-exp[i].amount%> 
+</td>
+<td>
+    <%-exp[i].time%>
+</td>
+<td>
+    <%-exp[i].date%>
+</td>
+<td>
+    <a href="/images/<%-exp[i].image%>" target="_blank"><i class="fa fa-file-image"></i></a>
+</td>
+                </tr>
+                
+                <%}%>
+        </table>
+        </div>
+    </div>
+</div>
+<script>
+function submitForm(){
+    let r=confirm('Save expense ?');
+    if(r==true){
+        document.getElementById("myform").submit();
+    }
+}
+</script>
+<script>
+    // Get the current time
+    const now = new Date();
+    function setCurrentTime() {
+            
+            const hours = String(now.getHours()).padStart(2, '0'); // Ensure 2-digit format
+            const minutes = String(now.getMinutes()).padStart(2, '0'); // Ensure 2-digit format
+            const currentTime = `${hours}:${minutes}`;
+
+            // Set the value of the input field
+            const timeInput = document.getElementById('timeInput');
+            timeInput.value = currentTime;
+            
+        }
+
+        // Call the function when the page loads
+        window.onload = setCurrentTime;
+       
+  </script>
+    <script>
+        // Get the current date
+      
+        const year = now.getFullYear();
+        const month = String(now.getMonth() + 1).padStart(2, '0'); // Months are zero-based
+        const day = String(now.getDate()).padStart(2, '0');
+    
+        // Set the value of the input to the current date
+        document.getElementById('dateInput').value = `${year}-${month}-${day}`;
+ 
+      </script>
+<%-include('footer.ejs')%>
