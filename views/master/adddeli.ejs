@@ -33,6 +33,8 @@
             <h4>PRODUCT DETAILS</h4>
             <table class="table mt-4 table-striped">
                 <tr>
+                    <th>Customer</th>
+                    <th>Address</th>
                     <th>Product</th>
                     <th>Qauntity</th>
                    
@@ -52,10 +54,35 @@
 </div>
 <script>
      let j=0;
+     function setCust(){
+        let ar=  <%- JSON.stringify(cust) %>;
+        
+        for(let i of ar){
+            if(event.target.value==i.cust_id){
+
+             document.getElementById("cust_add-"+event.target.id.split('-')[1]).innerText=i.cust_add;
+            }
+        }
+       
+     }
     function addRow(){
        
         $("#tbody").append(`
           <tr>
+             <td>
+                <select name="cust_id" id="cust-${j}" onchange="setCust()" class="form-control">
+                    <option value="" selected disabled>Select customer</option>
+                  <%for(let i of cust){%>
+                   <option value="<%-i.cust_id%>" ><%-i.cust_name%></option>
+                  
+                  <%}%>
+                  
+                    </select>
+                
+                </td>
+                <td>
+                    <textarea name="cust_add" id="cust_add-${j}" class="form-control"></textarea>
+                    </td>
             <td>
                 <select name="product" id="product-${j}" onchange="setProduct()" class="form-control">
                     <option value="" selected disabled>Select product</option>
@@ -102,18 +129,28 @@ function sendData(){
     let obj={
         "driver":document.getElementById("driver").value,
         "order_date":document.getElementById("oder_date").value,
-        "address":document.getElementById("addr").value,
+        "route":document.getElementById("addr").value,
         "product":[],
-        "qty":[]
+        "qty":[],
+        "customer":[],
+        "address":[]
     }
    
     let pro=document.getElementsByName("product");
     let qty=document.getElementsByName("qty");
+    let cust=document.getElementsByName("cust_id");
+    let add=document.getElementsByName("cust_add");
     for(let i of pro){
         obj.product.push(i.value);
     }
     for(let i of qty){
         obj.qty.push(i.value);
+    }
+    for(let i of cust){
+        obj.customer.push(i.value);
+    }
+    for(let i of add){
+        obj.address.push(i.value);
     }
     $.ajax({
         "method":"post",

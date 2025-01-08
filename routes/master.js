@@ -321,9 +321,11 @@ route.get("/add_stock",validateAdmin,async function(req,res){
     let user=await exe(`select*from admin where id='${req.session.mid}'`);
     let stock=await exe(`select*from stock where stock_qty>0`);
     let driver=await exe(`select*from driver_details where driver_available_status='true'`);
+    let cust=await exe(`select*from customer`);
     var obj ={"admin":user[0],
         "product":stock,
-        "driver":driver
+        "driver":driver,
+        "cust":cust
     }
     res.render("master/adddeli.ejs",obj);
  })
@@ -395,11 +397,11 @@ route.get("/add_stock",validateAdmin,async function(req,res){
  
  route.post("/save-delivery",async(req,res)=>{
     let update_drive=await exe(`update driver_details set driver_available_status='false' where driver_details_id='${req.body.driver}'`);
-    let oderdet=await exe(`insert into order_det(order_date,driver,address,status) values('${req.body.order_date}','${req.body.driver}','${req.body.address}','pending')`);
+    let oderdet=await exe(`insert into order_det(order_date,driver,address,status) values('${req.body.order_date}','${req.body.driver}','${req.body.route}','pending')`);
     for(let i=0;i<req.body.product.length;i++){
          let sto=await exe(`select*from stock where stock_id='${req.body.product[i]}'`);
-         let update_sto=await exe(`update stock set stock_qty='${sto[0].stock_qty-req.body.qty[i]}'`);
-        let d=await exe(`insert into order_list(product,qty,order_id) values('${req.body.product[i]}','${req.body.qty[i]}','${oderdet.insertId}')`);
+         let update_sto=await exe(`update stock set stock_qty='${sto[0].stock_qty-req.body.qty[i]}' where stock_id='${req.body.product[i]}'`);
+        let d=await exe(`insert into order_list(customer_id,cust_add,product,qty,order_id,isDone) values('${req.body.customer[i]}','${req.body.address[i]}','${req.body.product[i]}','${req.body.qty[i]}','${oderdet.insertId}','false')`);
 
     }
     res.send("1");
@@ -424,12 +426,12 @@ route.post("/update-oder-address/:id",async(req,res)=>{
     res.send("done");
 })
 route.get("/order-list/:id",validateAdmin,async(req,res)=>{
- let d=await exe(`select*,(select stock_name from stock where stock.stock_id=order_list.product) as product_name from order_list where order_id='${req.params.id}'`);
+ let d=await exe(`select*,(select stock_name from stock where stock.stock_id=order_list.product) as product_name,(select cust_name from customer where customer.cust_id=order_list.customer_id) as cust_name from order_list where order_id='${req.params.id}'`);
     let user=await exe(`select*from admin where id='${req.session.mid}'`);
     var obj ={"data":d,"admin":user[0]}
     res.render("master/oderlist.ejs",obj);
 })
-     
+
 
 
 route.get("/add_customer",validateAdmin,async function(req,res){
@@ -476,7 +478,11 @@ route.post("/edit_cutomer",async function(req,res){
     var cust = await exe(`update customer set cust_name ='${d.cust_name}', cust_mobile = '${d.cust_mobile}',cust_add = '${d.cust_add}' where cust_id = '${d.cust_id}' `)
 
     res.redirect("/customer_list")
+
 })
+
+
+
 route.get("/expense/:oid",validateAdmin,async(req,res)=>{
     let exp=await exe(`select*from expense where order_id='${req.params.oid}'`);
     let user=await exe(`select*from admin where id='${req.session.mid}'`);
