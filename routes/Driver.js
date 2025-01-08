@@ -2,7 +2,7 @@ let express=require('express');
 let route=express.Router();
 let exe=require("./connection");
 function validateDriver(req,res,next){
-    req.session.did=19;
+    req.session.did=1;
     if(req.session.did){
 next();
     }
@@ -67,7 +67,7 @@ route.get("/task",validateDriver,async(req,res)=>{
     let driver=await exe(`select*from driver_details where driver_details_id='${req.session.did}'`);
     let d=await exe(`select*,(select number from vehical where vehical.id=order_det.vehical ) as v_num,(select driver_name from driver_details where driver_details.driver_details_id=order_det.driver) as driver_name from order_det where driver='${req.session.did}' and status != 'completed' `);
     if(d.length!=0){
-     order=await exe(`select*,(select stock_name from stock where stock.stock_id=order_list.product) as product_name from order_list where order_id='${d[0].id}'`);
+     order=await exe(`select*,(select stock_name from stock where stock.stock_id=order_list.product) as product_name,(select cust_name from customer where customer.cust_id=order_list.customer_id) as c_name,(select cust_mobile from customer where customer.cust_id=order_list.customer_id) as c_num from order_list where order_id='${d[0].id}'`);
     }
     let obj={
         "driver":driver[0],

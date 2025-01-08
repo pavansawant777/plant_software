@@ -31,11 +31,20 @@
          <p><%-data.address%></p>
       
          
-         <table class="table table-striped">
+         <table class="table table-striped table-bordered">
             <tr>
                 <th>SrNo</th>
+                <th>Customer</th>
+                <th>Contact</th>
+                <th>Address</th>
                 <th>Product</th>
+
                 <th>Quantity</th>
+                <th>Return Cylender</th>
+                <th>Return Cylender Quantity</th>
+                <th>Paid Amount</th>
+                <th>Status</th>
+
             </tr>
             <%for(let i=0;i<order.length;i++){%>
                 <tr>
@@ -43,10 +52,53 @@
                         <%-i+1%>
                     
                     </td>
+                    <td><%-order[i].c_name%></td>
+                    <td><%-order[i].c_num%></td>
+                    <td><%-order[i].cust_add%></td>
                     <td>
         
                         <%-order[i].product_name%></td>
                     <td><%-order[i].qty%></td>
+                    <td><%-order[i].return_c_name%></td>
+                    <td><%-order[i].return_c%></td>
+                    <td><%-order[i].paid_amount%></td>
+                    <td>
+                        <%if(order[i].isDone=='false'){%>
+                        <button type="button" class="btn btn-success" data-bs-toggle="modal"  data-bs-target="#exampleModal<%-order[i].id%>">
+                           Done
+                          </button>
+                          <%}%>
+                          
+                          <!-- Modal -->
+                          <div class="modal fade" id="exampleModal<%-order[i].id%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h1 class="modal-title fs-5" id="exampleModalLabel">Return Products</h1>
+                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                  <table class="table table-striped">
+                                    <tr>
+                                        <th>Product Name</th>
+                                        <th>Quantity </th>
+                                        <th><button class="btn btn-primary" onclick="addRow()">+</button></th>
+                                    </tr>
+                                    <tbody id="tbody">
+                                        
+                                    </tbody>
+                                  </table>
+                                </div>
+                                <div class="modal-footer">
+                            
+                                  <button type="button" class="btn btn-success" onclick="sendData('<%-data.id%>')">Procceed</button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                    
+                        
+                    </td>
                 </tr>
                 <%}%>
          </table>
@@ -64,37 +116,7 @@
             <% if(data.status=='delivered'){%>
                 <!-- <a class="btn btn-success" href="/driver/update-task-status/return">Return</a> -->
 <!-- Button trigger modal -->
-<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
-    Return
-  </button>
-  
-  <!-- Modal -->
-  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">Return Products</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <table class="table table-striped">
-            <tr>
-                <th>Product Name</th>
-                <th>Quantity </th>
-                <th><button class="btn btn-primary" onclick="addRow()">+</button></th>
-            </tr>
-            <tbody id="tbody">
-                
-            </tbody>
-          </table>
-        </div>
-        <div class="modal-footer">
-    
-          <button type="button" class="btn btn-success" onclick="sendData('<%-data.id%>')">Procceed</button>
-        </div>
-      </div>
-    </div>
-  </div>
+
 
                 <%}%>
                 <%if(data.status=='return'){%>
