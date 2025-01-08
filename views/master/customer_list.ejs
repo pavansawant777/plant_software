@@ -1,29 +1,89 @@
 <%-include("header.ejs")%>
-    <div class="container card card-body my-3 table-responsive">
-        <h1>Customer List</h1>
-        <table class="table table-bordered">
-            <tr>
-                <td>SrNo</td>
-                <th>Action</th>
-                <td>Customer Name</td>
-                <td>Customer Mobile</td>
-                <td>Customer Address</td>
-            </tr>
 
-            <% cust.map((row,i)=>{ %>
-                <tr>
-                    <td><%-i+1%></td>
-                    <td style="white-space: nowrap;">
-                        <a href="/delete_cust/<%-row.cust_id%>" class="btn btn-sm btn-danger"><i class="fa-solid fa-trash"></i> </a>
-                        
-                        <a href="/edit_cust/<%-row.cust_id%>" class="btn btn-sm btn-primary"><i class="fa-solid fa-pen-to-square "></i> </a>
-                    </td>
-                    <td><%-row.cust_name%></td>
-                    <td><%-row.cust_mobile%></td>
-                    <td><%-row.cust_add%></td>
-                </tr>
-            <%})%>
+
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    
+    <div class="container p-5 ">
+        <div class="row p-3 bg-light" style="overflow-x: scroll;">
+          <div class="col-md-12">
+    
+          
+                <h3>Customer's List</h3>
+           
+            <table id="example" class="display my-3">
+                <thead>
+        
+             
+                    <tr>
+                        <td>SrNo</td>
+                        <th>Action</th>
+                        <td>Customer Name</td>
+                        <td>Customer Mobile</td>
+                        <td>Customer Address</td>
+                    </tr>
+            </thead>
+            <tbody>
+        
+           
+                <% cust.map((row,i)=>{ %>
+                    <tr>
+                        <td><%-i+1%></td>
+                        <td>
+                            <!-- <a href="/delete_cust/<%-row.cust_id%>" class="btn btn-sm btn-danger"><i class="fa-solid fa-trash"></i> </a> -->
+                            <button class="btn btn-sm btn-danger" onclick="deleteDriver('<%-row.cust_id%>')" ><i class="fa-solid fa-trash"></i></button>
+                            <a href="/edit_cust/<%-row.cust_id%>" class="btn btn-sm btn-primary"><i class="fa-solid fa-pen-to-square "></i> </a>
+                        </td>
+                        <td><%-row.cust_name%></td>
+                        <td><%-row.cust_mobile%></td>
+                        <td><%-row.cust_add%></td>
+                    </tr>
+                <%})%>
+            </tbody>
+            </table>
             
-        </table>
-    </div>
+            <button class="btn btn-primary float-end mt-5" onclick="window.print()">Print</button>
+            <button class="btn btn-success mx-3 float-end mt-5" id="driverList">Excel</button>
+           
+        </div>
+        </div>
+      
+        </div>
+    <script>
+        function deleteDriver(id){
+            let r=confirm('Delete Customer ?');
+            if(r==true){
+                location.href='/delete_cust/'+id;
+            }
+        }
+    
+        document.getElementById('driverList').addEventListener('click', function () {
+           
+           var table = document.getElementById('example');
+    
+         
+           var worksheet = XLSX.utils.table_to_sheet(table);
+    
+        
+           var workbook = XLSX.utils.book_new();
+           XLSX.utils.book_append_sheet(workbook, worksheet, 'StockList');
+    
+         
+           XLSX.writeFile(workbook, 'DriverList.xlsx');
+       });
+    </script>
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
 <%-include("footer.ejs")%>

@@ -19,6 +19,8 @@ route.get("/",validateAdmin,async(req,res)=>{
     var vd = await exe(`select count(*) as ttlvd from order_det`)
     var vdp = await exe(`select count(*) as ttlp from order_det where status='pending' `)
     var vda = await exe(`select count(*) as ttla from order_det where status='completed' `)
+
+    var cust = await exe(`select count(*) as ttlc from customer`)
    
     let user=await exe(`select*from admin where id='${req.session.mid}'`);
     let obj={
@@ -29,6 +31,7 @@ route.get("/",validateAdmin,async(req,res)=>{
     "vd":vd[0],
     "vdp":vdp[0],
     "vda":vda[0],
+    "cust":cust[0]
     
    }
 res.render("master/index.ejs",obj);

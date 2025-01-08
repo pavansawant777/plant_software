@@ -129,6 +129,18 @@
         document.getElementById("del-sub-list").classList.add("active")
        }
     }
+
+    if(url.includes("add_customer")||url.includes("customer_list")||url.includes("/edit_cust/")){
+    document.getElementById("dash").classList.remove("active");
+      document.getElementById("cust-main").classList.add("active")
+       document.getElementById("cust-main").classList.add("open")
+       if(url.includes("add-delivery")){
+        document.getElementById("cust-sub-add").classList.add("active")
+       }
+       else{
+        document.getElementById("cust-sub-list").classList.add("active")
+       }
+    }
   }
 
   changeActiveMenu();
