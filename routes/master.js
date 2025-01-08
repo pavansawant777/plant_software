@@ -429,7 +429,7 @@ route.get("/order-list/:id",validateAdmin,async(req,res)=>{
     var obj ={"data":d,"admin":user[0]}
     res.render("master/oderlist.ejs",obj);
 })
-<<<<<<< HEAD
+     
 
 
 route.get("/add_customer",validateAdmin,async function(req,res){
@@ -476,12 +476,12 @@ route.post("/edit_cutomer",async function(req,res){
     var cust = await exe(`update customer set cust_name ='${d.cust_name}', cust_mobile = '${d.cust_mobile}',cust_add = '${d.cust_add}' where cust_id = '${d.cust_id}' `)
 
     res.redirect("/customer_list")
-=======
+})
 route.get("/expense/:oid",validateAdmin,async(req,res)=>{
     let exp=await exe(`select*from expense where order_id='${req.params.oid}'`);
     let user=await exe(`select*from admin where id='${req.session.mid}'`);
     var obj ={"exp":exp,"admin":user[0]}
     res.render("master/expense.ejs",obj);
->>>>>>> 59892543e73e9a2ab4814d0f3ac2c2c8f3a1d5f2
+
 })
 module.exports=route;
