@@ -1,0 +1,33 @@
+<%-include("header.ejs")%>
+
+    <div class="container card card-body py-3 my-3">
+        <h1>Edit Customer</h1>
+
+        <form action="/edit_cutomer" method="post">
+            <input type="hidden" name="cust_id" value="<%-cust.cust_id%>">
+            <div class="row">
+                <div class="col-md-6">
+                    <label class="my-3">Customer Name</label>
+                    <input type="text" class="form-control" name="cust_name" placeholder="Enter Customer Name" value="<%-cust.cust_name%>">
+                </div>
+
+                <div class="col-md-6">
+                    <label class="my-3">Customer Mobile</label>
+                    <input type="number" class="form-control" name="cust_mobile" placeholder="Enter Customer Mobile" value="<%-cust.cust_mobile%>">
+                </div>
+
+                <div class="col-md-12">
+                    <label class="my-3">Customer Address</label>
+                    <textarea placeholder="Enter Customer Address" name="cust_add" class="form-control"><%-cust.cust_add%></textarea>
+                </div>
+                
+                <div class="col-md-12 my-3">
+                    <button class="btn btn-primary float-end">Update Customer</button>
+
+                </div>
+
+            </div>
+        </form>
+    </div>
+    
+<%-include("footer.ejs")%>

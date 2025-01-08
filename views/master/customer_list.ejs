@@ -1,0 +1,29 @@
+<%-include("header.ejs")%>
+    <div class="container card card-body my-3 table-responsive">
+        <h1>Customer List</h1>
+        <table class="table table-bordered">
+            <tr>
+                <td>SrNo</td>
+                <th>Action</th>
+                <td>Customer Name</td>
+                <td>Customer Mobile</td>
+                <td>Customer Address</td>
+            </tr>
+
+            <% cust.map((row,i)=>{ %>
+                <tr>
+                    <td><%-i+1%></td>
+                    <td style="white-space: nowrap;">
+                        <a href="/delete_cust/<%-row.cust_id%>" class="btn btn-sm btn-danger"><i class="fa-solid fa-trash"></i> </a>
+                        
+                        <a href="/edit_cust/<%-row.cust_id%>" class="btn btn-sm btn-primary"><i class="fa-solid fa-pen-to-square "></i> </a>
+                    </td>
+                    <td><%-row.cust_name%></td>
+                    <td><%-row.cust_mobile%></td>
+                    <td><%-row.cust_add%></td>
+                </tr>
+            <%})%>
+            
+        </table>
+    </div>
+<%-include("footer.ejs")%>

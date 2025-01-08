@@ -430,4 +430,50 @@ route.get("/order-list/:id",validateAdmin,async(req,res)=>{
     res.render("master/oderlist.ejs",obj);
 })
 
+
+route.get("/add_customer",validateAdmin,async function(req,res){
+    let user=await exe(`select*from admin where id='${req.session.mid}'`);
+    
+
+    var obj = {"admin":user[0]}
+    res.render("master/add_customer.ejs",obj)
+})
+
+route.post("/save_cutomer",async function(req,res){
+    var d = req.body
+    var sql = `insert into customer (cust_name,cust_mobile,cust_add)values(?,?,?)`
+
+    var data = await exe(sql,[d.cust_name,d.cust_mobile,d.cust_add])
+    res.redirect("/add_customer")
+    // res.send(data)
+})
+
+route.get("/customer_list",validateAdmin,async function(req,res){
+    let user=await exe(`select*from admin where id='${req.session.mid}'`);
+    var cust = await exe(`select*from customer`)
+    var obj = {"admin":user[0],"cust":cust}
+
+    res.render("master/customer_list.ejs",obj)
+})
+
+route.get("/delete_cust/:id",async function(req,res){
+    var sql = await exe(`delete from customer where cust_id ='${req.params.id}'`)
+
+    res.redirect("/customer_list")
+})
+
+route.get("/edit_cust/:id",validateAdmin,async function(req,res){
+    let user=await exe(`select*from admin where id='${req.session.mid}'`);
+    var data = await exe(`select*from customer where cust_id = '${req.params.id}'`)
+
+    var obj = {"admin":user[0],"cust":data[0]}
+    res.render("master/edit_customer.ejs",obj)
+})
+
+route.post("/edit_cutomer",async function(req,res){
+    var d = req.body
+    var cust = await exe(`update customer set cust_name ='${d.cust_name}', cust_mobile = '${d.cust_mobile}',cust_add = '${d.cust_add}' where cust_id = '${d.cust_id}' `)
+
+    res.redirect("/customer_list")
+})
 module.exports=route;
