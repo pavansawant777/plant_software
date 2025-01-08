@@ -148,8 +148,23 @@ route.get("/order-list/:id",validateDriver,async(req,res)=>{
    })
    route.get("/expense/:id",validateDriver,async(req,res)=>{
     let driver=await exe(`select*from driver_details where driver_details_id='${req.session.did}'`);
-
-    var obj ={"driver":driver[0]}
+    let exp=await exe(`select*from expense where order_id='${req.params.id}'`);
+    var obj ={"driver":driver[0],"oid":req.params.id,"exp":exp}
     res.render("driver/expense.ejs",obj);
+   })
+   route.post('/save-expense/:id',async(req,res)=>{
+    
+    if(req.files){
+      req.body.image=new Date().getTime()+req.files.img.name;
+      req.files.img.mv("public/images/"+req.body.image);
+      let d=req.body;
+      let da=await exe(`insert into expense(expense_for,amount,time,date,image,order_id) values('${d.expense_for}','${d.amount}','${d.time}','${d.date}','${d.image}','${req.params.id}')`);
+    }
+    else{
+        let d=req.body;
+        let da=await exe(`insert into expense(expense_for,amount,time,date,order_id) values('${d.expense_for}','${d.amount}','${d.time}','${d.date}','${req.params.id}')`);
+
+    }
+    res.redirect('/driver/expense/'+req.params.id);
    })
 module.exports=route;

@@ -26,7 +26,7 @@
              
                 <textarea rows="5" class="form-control" id="addr" required></textarea>
             </div>
-
+        
            </div>
         </div>
         <div class="col-md-12 rounded bg-light p-4 mt-5" style="overflow-x:scroll;" >
@@ -106,9 +106,7 @@ function sendData(){
         "product":[],
         "qty":[]
     }
-    document.getElementById('subbtn').innerHTML(`<div class="spinner-border" role="status">
-                <span class="visually-hidden">Loading...</span>
-              </div>`);
+   
     let pro=document.getElementsByName("product");
     let qty=document.getElementsByName("qty");
     for(let i of pro){

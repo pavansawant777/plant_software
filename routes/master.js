@@ -429,5 +429,10 @@ route.get("/order-list/:id",validateAdmin,async(req,res)=>{
     var obj ={"data":d,"admin":user[0]}
     res.render("master/oderlist.ejs",obj);
 })
-
+route.get("/expense/:oid",validateAdmin,async(req,res)=>{
+    let exp=await exe(`select*from expense where order_id='${req.params.oid}'`);
+    let user=await exe(`select*from admin where id='${req.session.mid}'`);
+    var obj ={"exp":exp,"admin":user[0]}
+    res.render("master/expense.ejs",obj);
+})
 module.exports=route;
