@@ -3,7 +3,7 @@ let route=express.Router();
 let mysql=require('mysql');
 let exe=require('./connection')
 function validateAdmin(req,res,next){
-req.session.mid=0;
+req.session.mid=1;
     if(req.session.mid){
 next();
 }
@@ -50,6 +50,8 @@ route.post("/save-admin",validateAdmin,async(req,res)=>{
 let d=await exe(`insert into admin(name,contact,image,password) values('${req.body.name}','${req.body.number}','${req.body.image}','${req.body.pass}')`);
 res.redirect("/add-admin");
 })
+
+
 route.get("/admin-list",validateAdmin,async(req,res)=>{
     let d=await exe('select*from admin');
     let user=await exe(`select*from admin where id='${req.session.mid}'`);
