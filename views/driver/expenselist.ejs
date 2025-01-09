@@ -1,0 +1,44 @@
+<%-include('header.ejs')%>
+<div class="container">
+    <div class="row p-5">
+        <div class="col-md-12 mt-5 rounded bg-light p-4" style="overflow-x: scroll;">
+            <h3>EXPENSE LIST</h3>
+                 <table class="table table-spriped mt-3">
+                 <tr>
+                     <th>Srno</th>
+                     <th>Expense For</th>
+                     <th>Amount</th>
+                     <th>Time</th>
+                     <th>Date</th>
+                     <th>Invoice</th>
+                 </tr>
+                 <%for(let i=0;i<exp.length;i++){%>
+                     <tr>
+                     <td>
+                         <%-i+1%>
+                     
+                     </td>
+     <td>
+         <%-exp[i].expense_for%>
+     </td>
+     <td>
+       &#8377;  <%-exp[i].amount%> 
+     </td>
+     <td>
+         <%-exp[i].time%>
+     </td>
+     <td>
+         <%-exp[i].date%>
+     </td>
+     <td>
+         <a href="/images/<%-exp[i].image%>" target="_blank"><i class="fa fa-file-image"></i></a>
+     </td>
+                     </tr>
+                     
+                     <%}%>
+             </table>
+             </div>
+    </div>
+</div>
+
+<%-include('footer.ejs')%>

@@ -8,8 +8,13 @@
         <table class="table table-striped mt-3">
             <tr>
                 <th>SrNo</th>
+                <th>Customer</th>
+                <th>Address</th>
                 <th>Product</th>
-                <th>Quantity</th>
+                <th>Cylender Quantity</th>
+                <th>Return Cylenders Quantity</th>
+                <th>Paid Amount</th>
+                <th>Status</th>
 
             </tr>
             <%for(let i=0;i<data.length;i++){%>
@@ -19,9 +24,18 @@
             
             </td>
             <td>
+        
+        <a href="/edit_cust/<%-data[i].customer_id%>"  >      <%-data[i].cust_name%>
+        </a>
+        </td>
+                <td> <%-data[i].cust_add%></td>
+            <td>
 
                 <%-data[i].product_name%></td>
             <td><%-data[i].qty%></td>
+            <td><%-data[i].return_c%></td>
+            <td><%-data[i].paid_amount%></td>
+            <td class="<%-(data[i].isDone=='false')?'text-warning':'text-success'%>"><%-(data[i].isDone=='false')?'pending':'delivered'%></td>
         </tr>
         <%}%>
         </table>

@@ -5,11 +5,11 @@
         <div class="col-md-12 rounded p-3 bg-light" style="overflow-x: scroll;">
             <h4>ASSINGED TASK</h4>
             <div class="row">
-                <div class="col-md-2">
+                <div class="col-md-3    ">
                     <strong style="font-size: 14px;">Status:</strong>
                     <p><%-data.status%></p>
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-3    ">
                     <strong style="font-size: 14px;">Order Date</strong></br>
                     <p><%-data.order_date%></p>
                 </div>
@@ -21,13 +21,10 @@
                     <strong style="font-size: 14px;">Return Date:</strong>
          <p><%-data.return_date%></p>
                 </div>
-                <div class="col-md-2">
-                    <strong style="font-size: 14px;">Return Item:</strong>
-         <a href="/driver/return-item/<%-data.id%>" class="btn btn-primary btn-sm"><i class=" fa fa-list"></i> list</a>
-                </div>
+          
             </div>
         
-         <strong style="font-size: 14px;">Address :</strong>
+         <strong style="font-size: 14px;">Route :</strong>
          <p><%-data.address%></p>
       
          
@@ -61,41 +58,64 @@
                     <td><%-order[i].qty%></td>
                     <td><%-order[i].return_c_name%></td>
                     <td><%-order[i].return_c%></td>
-                    <td><%-order[i].paid_amount%></td>
+                    <td> &#8377; <%-order[i].paid_amount%> </td>
                     <td>
+                        <%if(data.status=='dispatched'){%>
                         <%if(order[i].isDone=='false'){%>
                         <button type="button" class="btn btn-success" data-bs-toggle="modal"  data-bs-target="#exampleModal<%-order[i].id%>">
-                           Done
+                           Complete
                           </button>
-                          <%}%>
-                          
-                          <!-- Modal -->
                           <div class="modal fade" id="exampleModal<%-order[i].id%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered">
                               <div class="modal-content">
                                 <div class="modal-header">
-                                  <h1 class="modal-title fs-5" id="exampleModalLabel">Return Products</h1>
+                                  <h1 class="modal-title fs-5" id="exampleModalLabel">Sale Products</h1>
                                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
-                                  <table class="table table-striped">
-                                    <tr>
-                                        <th>Product Name</th>
-                                        <th>Quantity </th>
-                                        <th><button class="btn btn-primary" onclick="addRow()">+</button></th>
-                                    </tr>
-                                    <tbody id="tbody">
-                                        
-                                    </tbody>
-                                  </table>
+                                <label class="mb-2">Customer :</label>
+                                <form method="post" action="/driver/sell-product/<%-order[i].id%>">
+                                 <input type="text" value="<%-order[i].c_name%>" readonly class="form-control mb-3">
+                                 <label class="mb-2">Contact :</label>
+                                 <input type="text" value="<%-order[i].c_num%>" readonly class="form-control mb-3">
+                                 <div class="row">
+                                    <div class="col-6">
+                                        <label class="mb-2">Cylender :</label>
+                                        <input type="text" value="<%-order[i].product_name%>" readonly class="form-control mb-3">
+                                    </div>
+                                    <div class="col-6">
+                                        <label class="mb-2">Quantity :</label>
+                                        <input type="text" value="<%-order[i].qty%>" readonly class="form-control mb-3">
+                                    </div>
+                                 </div>
+                                 <label class="mb-2">Paid Amount (in &#8377;) :</label>
+                                 <input type="number" name="paid_amount" required  class="form-control mb-3">
+                                 <div class="row">
+                                    <div class="col-6">
+                                        <label class="mb-2">Return Cylender :</label>
+                                        <input type="text"  name="return_c_name" required class="form-control mb-3">
+                                    </div>
+                                    <div class="col-6">
+                                        <label class="mb-2"> Quantity :</label>
+                                        <input type="text"  class="form-control mb-3" required name="return_c">
+                                    </div>
+                                 </div>
                                 </div>
-                                <div class="modal-footer">
+                                <div class="modal-footer text-center">
                             
-                                  <button type="button" class="btn btn-success" onclick="sendData('<%-data.id%>')">Procceed</button>
+                                  <button class="btn btn-success" >Save</button>
+                                </form>
                                 </div>
                               </div>
                             </div>
                           </div>
+
+                          <%}else{%>
+                          <button class="btn btn-success" disabled>Completed</button>
+                            <%}}%>
+                          
+                          <!-- Modal -->
+                   
                     
                         
                     </td>
@@ -108,18 +128,8 @@
                 <a class="btn btn-success" href="/driver/update-task-status/<%-data.id%>/dispatched"  >Start</a>
 
             <%}%>
-            <% if(data.status=='dispatched'){%>
-                <a class="btn btn-success" href="/driver/update-task-status/<%-data.id%>/delivered">Delivered</a>
-
-
-            <%}%>
-            <% if(data.status=='delivered'){%>
-                <!-- <a class="btn btn-success" href="/driver/update-task-status/return">Return</a> -->
-<!-- Button trigger modal -->
-
-
-                <%}%>
-                <%if(data.status=='return'){%>
+      
+                <%if(data.status=='dispatched'){%>
                     <a class="btn btn-success" href="/driver/update-task-status/<%-data.id%>/completed">Complete</a>
 
 

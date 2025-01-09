@@ -493,4 +493,5 @@ route.get("/expense/:oid",validateAdmin,async(req,res)=>{
     res.render("master/expense.ejs",obj);
 
 })
+
 module.exports=route;

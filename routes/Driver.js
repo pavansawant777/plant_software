@@ -15,8 +15,10 @@ route.get("/login",async(req,res)=>{
 })
 route.get("/",validateDriver,async(req,res)=>{
     let driver=await exe(`select*from driver_details where driver_details_id='${req.session.did}'`);
+    let ttl_task=await exe(`select Count(*) as ttl_task from order_det where driver='${req.session.did}' and status='completed'`);
     let obj={
-        "driver":driver[0]
+        "driver":driver[0],
+        "ttl_task":ttl_task[0]
     }
     
 res.render("driver/index.ejs",obj);
@@ -167,4 +169,16 @@ route.get("/order-list/:id",validateDriver,async(req,res)=>{
     }
     res.redirect('/driver/expense/'+req.params.id);
    })
+   route.post("/sell-product/:oid",async(req,res)=>{
+    let d=req.body;
+    let da=await exe(`update order_list set isDone='true',return_c_name='${d.return_c_name}',return_c='${d.return_c}',paid_amount='${d.paid_amount}' where id='${req.params.oid}'`);
+    res.redirect("/driver/task");
+   })
+   route.get("/expense-list/:oid",validateDriver,async(req,res)=>{
+    let driver=await exe(`select*from driver_details where driver_details_id='${req.session.did}'`);
+
+    let exp=await exe(`select*from expense where order_id='${req.params.oid}'`);
+    var obj ={"exp":exp,"driver":driver[0]}
+    res.render("driver/expenselist.ejs",obj);
+})
 module.exports=route;
