@@ -2,7 +2,7 @@ let express=require('express');
 let route=express.Router();
 let exe=require("./connection");
 function validateDriver(req,res,next){
-    req.session.did=1;
+   
     if(req.session.did){
 next();
     }

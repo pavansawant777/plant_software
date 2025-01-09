@@ -85,39 +85,16 @@
   function changeActiveMenu(){
     let url=location.href;
     
-    if(url.includes("add_driver")||url.includes("driver_list")||url.includes("edit_driver_details")){
+    if(url.includes("/task")||url.includes("driver_list")||url.includes("edit_driver_details")){
     document.getElementById("dash").classList.remove("active");
-      document.getElementById("driv-main").classList.add("active")
-       document.getElementById("driv-main").classList.add("open")
-       if(url.includes("add_driver")){
-        document.getElementById("driv-sub-add").classList.add("active")
-       }
-       else{
-        document.getElementById("driv-sub-list").classList.add("active")
-       }
+    document.getElementById("task").classList.add("active");
     }
-    if(url.includes("add-vehical")||url.includes("vehical-list")||url.includes("edit-vehical")){
+
+    if(url.includes("/completed-task")||url.includes("/order-list/")||url.includes("/expense-list/")){
     document.getElementById("dash").classList.remove("active");
-      document.getElementById("veh-main").classList.add("active")
-       document.getElementById("veh-main").classList.add("open")
-       if(url.includes("add-vehical")){
-        document.getElementById("veh-sub-add").classList.add("active")
-       }
-       else{
-        document.getElementById("veh-sub-list").classList.add("active")
-       }
+    document.getElementById("c-task").classList.add("active");
     }
-    if(url.includes("add_stock")||url.includes("stock_list")||url.includes("edit_stock")){
-    document.getElementById("dash").classList.remove("active");
-      document.getElementById("stock-main").classList.add("active")
-       document.getElementById("stock-main").classList.add("open")
-       if(url.includes("add_stock")){
-        document.getElementById("stock-sub-add").classList.add("active")
-       }
-       else{
-        document.getElementById("stock-sub-list").classList.add("active")
-       }
-    }
+  
   }
 
   changeActiveMenu();
