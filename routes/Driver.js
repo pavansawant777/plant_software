@@ -16,9 +16,11 @@ route.get("/login",async(req,res)=>{
 route.get("/",validateDriver,async(req,res)=>{
     let driver=await exe(`select*from driver_details where driver_details_id='${req.session.did}'`);
     let ttl_task=await exe(`select Count(*) as ttl_task from order_det where driver='${req.session.did}' and status='completed'`);
+    let asgin=await exe(`select*from order_det where driver='${req.session.did}' and status='pending'`);
     let obj={
         "driver":driver[0],
-        "ttl_task":ttl_task[0]
+        "ttl_task":ttl_task[0],
+        "asgin":asgin
     }
     
 res.render("driver/index.ejs",obj);
