@@ -1,11 +1,9 @@
 <%-include('header.ejs')%>
   <style>
-   
-
     .blinking-glow-button {
       font-size: 18px;
       font-weight: bold;
-      padding: 5px ;
+      padding: 5px;
       border: none;
       border-radius: 50%;
       color: white;
@@ -28,32 +26,37 @@
       0% {
         box-shadow: 0 0 15px #ff5722, 0 0 30px #ff5722, 0 0 45px #ff5722;
       }
+
       50% {
         box-shadow: 0 0 20px #ff9800, 0 0 40px #ff9800, 0 0 60px #ff9800;
       }
+
       100% {
         box-shadow: 0 0 15px #ff5722, 0 0 30px #ff5722, 0 0 45px #ff5722;
       }
     }
 
     @keyframes blink {
-      0%, 100% {
+
+      0%,
+      100% {
         opacity: 1;
       }
+
       50% {
         opacity: 0.5;
       }
     }
-
   </style>
   <div class="container">
-    
+
     <div class="row my-5">
       <%if(asgin.length!=0){%>
-        <a href="/driver/task">
-          <div class="col-md-3 p-2">
-            <div class="card card-body  py-3 w-100">
-              <div class="row ">
+        <div class="col-md-3 p-2">
+          <div class="card card-body  py-3 w-100">
+            <div class="row ">
+              <a href="/driver/task">
+
                 <div class="hstack gap-3">
                   <img src="/images/taskassign.png" height="70" width="auto">
                   <div class="vr"></div>
@@ -63,32 +66,34 @@
                     <h3>1</h3>
                   </div>
                 </div>
-              </div>
+              </a>
+
             </div>
           </div>
-        </a>
+        </div>
         <%}%>
 
 
-        <div class="col-md-3 p-2">
-      <a href="/driver/completed-task">
+          <div class="col-md-3 p-2">
+            <div class="card card-body  py-3 w-100">
+              <div class="row ">
+                <a href="/driver/completed-task">
 
-          <div class="card card-body  py-3 w-100">
-            <div class="row ">
-              <div class="hstack gap-3">
-                <img src="/images/delivery-boy.png" height="60" width="auto">
-                <div class="vr"></div>
-                <div class=" text-center jusitfy-content-center">
-                  <h4>Total tasks</h4>
-                  <h3><%-ttl_task.ttl_task%></h3>
-                </div>
+                  <div class="hstack gap-3">
+                    <img src="/images/delivery-boy.png" height="60" width="auto">
+                    <div class="vr"></div>
+                    <div class=" text-center jusitfy-content-center">
+                      <h4>Total tasks</h4>
+                      <h3><%-ttl_task.ttl_task%></h3>
+                    </div>
+                  </div>
+                </a>
+
               </div>
             </div>
-          </div>
-      </a>
 
-        </div>
-     
+          </div>
+
 
 
 
