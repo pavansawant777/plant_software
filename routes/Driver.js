@@ -144,7 +144,7 @@ let obj={
 res.render("driver/completedtasklist.ejs",obj);
 })
 route.get("/order-list/:id",validateDriver,async(req,res)=>{
-    let d=await exe(`select*,(select stock_name from stock where stock.stock_id=order_list.product) as product_name from order_list where order_id='${req.params.id}'`);
+    let d=await exe(`select*,(select stock_name from stock where stock.stock_id=order_list.product) as product_name,(select cust_name from customer where customer.cust_id=order_list.customer_id) as cust_name from order_list where order_id='${req.params.id}'`);
     let driver=await exe(`select*from driver_details where driver_details_id='${req.session.did}'`);
 
        var obj ={"data":d,"driver":driver[0]}
@@ -183,6 +183,16 @@ route.get("/order-list/:id",validateDriver,async(req,res)=>{
     var obj ={"exp":exp,"driver":driver[0]}
     res.render("driver/expenselist.ejs",obj);
 })
-
+route.get("/order-inv/:oid/:lid",validateDriver,async(req,res)=>{
+    let driver=await exe(`select*from driver_details where driver_details_id='${req.session.did}'`);
+    let oder_det=await exe(`select*,(select number from vehical where vehical.id=order_det.vehical) as v_num,(select driver_name from driver_details where driver_details.driver_details_id=order_det.driver) as d_name from order_det where id='${req.params.oid}'`);
+    let oder_list=await exe(`select*,(select cust_name from customer where customer.cust_id=order_list.customer_id) as c_name,(select stock_name from stock where stock.stock_id=order_list.product) as product_name from order_list where id='${req.params.lid}'`);
+   
+    var obj ={"driver":driver[0],
+        "oder_det":oder_det[0],
+        "oder_list":oder_list[0]
+    }
+  res.render("driver/orderbill.ejs",obj);
+})
 
 module.exports=route;

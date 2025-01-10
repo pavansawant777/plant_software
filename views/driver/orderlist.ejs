@@ -15,6 +15,7 @@
                 <th>Return Cylenders Quantity</th>
                 <th>Paid Amount</th>
                 <th>Status</th>
+                <th>Invoice</th>
 
             </tr>
             <%for(let i=0;i<data.length;i++){%>
@@ -25,8 +26,8 @@
             </td>
             <td>
         
-        <a href="/edit_cust/<%-data[i].customer_id%>"  >      <%-data[i].cust_name%>
-        </a>
+           <%-data[i].cust_name%>
+   
         </td>
                 <td> <%-data[i].cust_add%></td>
             <td>
@@ -36,6 +37,11 @@
             <td><%-data[i].return_c%></td>
             <td><%-data[i].paid_amount%></td>
             <td class="<%-(data[i].isDone=='false')?'text-warning':'text-success'%>"><%-(data[i].isDone=='false')?'pending':'delivered'%></td>
+            <td>
+                <a href="/driver/order-inv/<%-data[i].order_id%>/<%-data[i].id%>">
+                    <button class="btn btn-primary"><i class="fa fa-file-image"></i></button>
+                </a>
+            </td>
         </tr>
         <%}%>
         </table>

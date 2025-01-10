@@ -9,35 +9,46 @@
     </div>
     <div class="row mt-4">
         <div class="col-6">
-            <p><strong>Customer Name : </strong> <span id="date">Varad</span></p>
-            <p><strong>Address : </strong> <span id="date">Nagar</span></p>
+            <p><strong>Customer Name : </strong> <span id="date"><%-oder_list.c_name%></span></p>
+            <p><strong>Driver : </strong> <span id="date"><%-oder_det.d_name%></span></p>
+            <p><strong>Vehical Number : </strong> <span id="date"><%-oder_det.v_num%></span></p>
+            <p><strong>Status : </strong> <span id="date"><%-(oder_list.isDone=='true')?'completed':'pending'%>
+            
+            </span></p>
+            <p><strong>Address : </strong> <span id="date"><%-oder_list.cust_add%></span></p>
            
         </div>
 
         <div class="col-6 float-end">
             
-            <p class="float-end"><strong>Date:</strong> <span id="date">[Insert Date]</span></p>
+            <p class="float-end"><strong>Date:</strong> <span id="date"><%-oder_det.order_date%></span></p>
         </div>
     </div>
     <table class="table table-bordered mt-3">
         <h3 class="text-center">Invoice</h3>
         <thead class="table-primary">
             <tr>
-                <th>SrNo</th>
+               
                 <th>Order Product</th>
-                <th>Route</th>
-                <th>Vehicle No.</th>
-                <th>Return Cylinders</th>
-                
+                <th>Order Proudct 
+            Qty.
+                </th>
+                <th>Return product</th>
+                <th>Return product qty.</th>
+                <th>Paid Amount</th>
             </tr>
         </thead>
         <tbody>
+       
             <tr>
-                <td>[Insert Route]</td>
-                <td>[Insert Vehicle No.]</td>
-                <td>[Insert Qty]</td>
-                <td>[Insert Product Name/Qty]</td>
+              
+                <td><%-oder_list.product_name%></td>
+                <td><%-oder_list.qty%></td>
+                <td><%-oder_list.return_c_name%></td>
+                <td><%-oder_list.return_c%></td>
+                <td>&#8377; <%-oder_list.paid_amount%></td>
             </tr>
+         
         </tbody>
     </table>
     <div class="row mt-4">
