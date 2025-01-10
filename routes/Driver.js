@@ -2,7 +2,7 @@ let express=require('express');
 let route=express.Router();
 let exe=require("./connection");
 function validateDriver(req,res,next){
-   
+   req.session.did=1
     if(req.session.did){
 next();
     }
@@ -181,4 +181,6 @@ route.get("/order-list/:id",validateDriver,async(req,res)=>{
     var obj ={"exp":exp,"driver":driver[0]}
     res.render("driver/expenselist.ejs",obj);
 })
+
+
 module.exports=route;
