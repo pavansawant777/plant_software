@@ -1,6 +1,6 @@
 <%-include("header.ejs")%>
 
-<div class="container card card-body my-5">
+<div class="container card card-body my-5 table-responsive ">
     <div class="row mb-3">
         <div class="col-12 text-center">
             <span class=""><img src="/images/o3.png" height="70" width="auto"></span>
@@ -62,9 +62,7 @@
     </div>
     <div class="row mt-4">
         <div class="col-12 text-end">
-            <p><strong>Authorized Signature:</strong></p>
-            <div style="border-top: 1px solid #000; width: 200px; margin-left: auto;"></div>
-        </div>
+            <button class="btn btn-success" onclick="window.print()">Print</button>
     </div>
 </div>
 <%-include("footer.ejs")%>
