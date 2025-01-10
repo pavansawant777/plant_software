@@ -120,4 +120,7 @@ label{
 .btn{
   display: none;
 }
+.layout-navbar{
+  display: none;
+}
 }

@@ -1,0 +1,77 @@
+<%-include("header.ejs")%>
+
+<style>
+  
+</style>
+
+<div class="container card card-body my-5">
+    <div class="row mb-3">
+        <div class="col-12 text-center">
+            <span class=""><img src="/images/o3.png" height="70" width="auto"></span>
+            
+        </div>
+    </div>
+    <div class="row mt-4">
+        <div class="col-6">
+            <p><strong>Customer Name : </strong> <span id="date"><%-oder_list.c_name%></span></p>
+            <p><strong>Driver : </strong> <span id="date"><%-oder_det.d_name%></span></p>
+            <p><strong>Vehical Number : </strong> <span id="date"><%-oder_det.v_num%></span></p>
+            <p><strong>Status : </strong> <span id="date"><%-(oder_list.isDone=='true')?'completed':'pending'%>
+            
+            </span></p>
+            <p><strong>Address : </strong> <span id="date"><%-oder_list.cust_add%></span></p>
+           
+        </div>
+
+        <div class="col-6 float-end">
+            
+            <p class="float-end"><strong>Date:</strong> <span id="date"><%-oder_det.order_date%></span></p>
+        </div>
+    </div>
+    <table class="table table-bordered mt-3">
+        <h3 class="text-center">Invoice</h3>
+        <thead class="table-primary">
+            <tr>
+               
+                <th>Order Product</th>
+                <th>Order Proudct 
+            Qty.
+                </th>
+                <th>Return product</th>
+                <th>Return product qty.</th>
+                <th>Paid Amount</th>
+            </tr>
+        </thead>
+        <tbody>
+       
+            
+
+            <tr>
+                <td><%-oder_list.product_name%></td>
+                <td><%-oder_list.qty%></td>
+                <td><%-oder_list.return_c_name%></td>
+                <td><%-oder_list.return_c%></td>
+                <td>&#8377; <%-oder_list.paid_amount%></td>
+            </tr>
+         
+        </tbody>
+    </table>
+    
+    <div class="row mt-4">
+        <div class="col-12">
+            <p><strong>Notes:</strong></p>
+            <ul>
+                <li>Please verify the return cylinder count upon receipt.</li>
+                <li>For any discrepancies, contact [Insert Contact Information].</li>
+            </ul>
+        </div>
+    </div>
+    <div class="row mt-4">
+        <div class="col-12 text-end">
+            <button class="btn btn-success" onclick="window.print()">Print</button>
+        </div>
+    </div>
+</div>
+<%-include("footer.ejs")%>
+
+

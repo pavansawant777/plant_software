@@ -496,4 +496,24 @@ route.get("/expense/:oid",validateAdmin,async(req,res)=>{
 
 })
 
+route.get("/order_bill/:oid/:lid",validateAdmin,async function(req,res){
+
+    var bill =  await exe(`select * from order_list , customer where order_list.customer_id = customer.cust_id and id = '${req.params.id}'`) ; 
+    var c_bill =  await exe(`select * from customer where cust_id = '${req.params.cid}' `)
+
+    let oder_det=await exe(`select*,(select number from vehical where vehical.id=order_det.vehical) as v_num,(select driver_name from driver_details where driver_details.driver_details_id=order_det.driver) as d_name from order_det where id='${req.params.oid}'`);
+    let oder_list=await exe(`select*,(select cust_name from customer where customer.cust_id=order_list.customer_id) as c_name,(select stock_name from stock where stock.stock_id=order_list.product) as product_name from order_list where id='${req.params.lid}'`);
+   
+
+
+    let user=await exe(`select*from admin where id='${req.session.mid}'`);
+
+    var obj = {"admin":user[0],"oder_det":oder_det[0],"oder_list":oder_list[0]}
+
+    res.render("master/order_bill.ejs",obj)
+
+    // res.send("hello")
+    
+})
+
 module.exports=route;
