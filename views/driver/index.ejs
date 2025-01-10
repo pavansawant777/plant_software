@@ -1,25 +1,50 @@
 <%-include('header.ejs')%>
   <style>
-    .alert-box {
-      padding: 20px 40px;
+   
 
+    .blinking-glow-button {
+      font-size: 18px;
+      font-weight: bold;
+      padding: 5px ;
+      border: none;
+      border-radius: 50%;
+      color: white;
+      background-color: #ff5722;
+      text-transform: uppercase;
+      cursor: pointer;
+      box-shadow: 0 0 15px #ff5722;
+      animation: glow 1.5s infinite, blink 1s infinite;
+      position: absolute;
+      transition: transform 0.2s;
+      right: 5px;
+      top: 5px;
+    }
 
-      font-size: 1.5em;
-      border-radius: 10px;
-      box-shadow: 0 0 15px #696bff, 0 0 10px #5e60fb;
-      text-align: center;
-      animation: glow 1s infinite alternate;
+    .blinking-glow-button:hover {
+      transform: scale(1.1);
     }
 
     @keyframes glow {
-      from {
-        box-shadow: 0 0 15px #696bff, 0 0 10px #5e60fb;
+      0% {
+        box-shadow: 0 0 15px #ff5722, 0 0 30px #ff5722, 0 0 45px #ff5722;
       }
-
-      to {
-        box-shadow: 0 0 25px #5355e9, 0 0 40px #5355e9;
+      50% {
+        box-shadow: 0 0 20px #ff9800, 0 0 40px #ff9800, 0 0 60px #ff9800;
+      }
+      100% {
+        box-shadow: 0 0 15px #ff5722, 0 0 30px #ff5722, 0 0 45px #ff5722;
       }
     }
+
+    @keyframes blink {
+      0%, 100% {
+        opacity: 1;
+      }
+      50% {
+        opacity: 0.5;
+      }
+    }
+
   </style>
   <div class="container">
     <div class="row my-5">
@@ -30,13 +55,14 @@
               <img src="/images/delivery-boy.png" height="60" width="auto">
               <div class="vr"></div>
               <div class=" text-center jusitfy-content-center">
-                <h4>Total Assign</h4>
+                <h4>Total tasks</h4>
                 <h3><%-ttl_task.ttl_task%></h3>
               </div>
             </div>
           </div>
         </div>
       </div>
+      <%if(asgin.length!=0){%>
       <div class="col-md-3 p-2">
         <div class="card card-body  py-3 w-100">
           <div class="row ">
@@ -44,14 +70,15 @@
               <img src="/images/delivery-boy.png" height="60" width="auto">
               <div class="vr"></div>
               <div class=" text-center jusitfy-content-center">
-                <h4>Total Assign</h4>
+                <button class="blinking-glow-button"></button>
+                <h4>New Task Assign</h4>
                 <h3><%-ttl_task.ttl_task%></h3>
               </div>
             </div>
           </div>
         </div>
       </div>
-
+      <%}%>
 
 
 
