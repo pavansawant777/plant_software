@@ -3,7 +3,7 @@ let route=express.Router();
 let mysql=require('mysql');
 let exe=require('./connection')
 function validateAdmin(req,res,next){
-req.session.mid=1;
+
     if(req.session.mid){
 next();
 }
